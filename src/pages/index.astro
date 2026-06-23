@@ -1,0 +1,435 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Home — Fresh Groceries Delivered Fast">
+  <Header activePage="home" />
+
+  <!-- ═══ HERO — Bento Grid ═══════════════════════════════════════════ -->
+  <section class="bg-[#0b1120] px-4 sm:px-6 pt-6 pb-6">
+    <div class="max-w-7xl mx-auto">
+
+      <!-- ── BENTO GRID ─────────────────────────────────────────────── -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+        <!-- ❶ MAIN CARD (white, col-span-2) ─────────────────────────── -->
+        <div class="lg:col-span-2 bg-white rounded-[2rem] p-7 sm:p-10 relative overflow-hidden">
+          <!-- Decorative green arc top-right -->
+          <div class="absolute -top-16 -right-16 w-56 h-56 bg-primary-50 rounded-full pointer-events-none"></div>
+          <div class="absolute -top-8 -right-8 w-32 h-32 bg-primary-100 rounded-full pointer-events-none"></div>
+
+          <div class="relative">
+            <!-- Live badge -->
+            <div class="inline-flex items-center gap-2.5 bg-gray-900 text-white text-xs font-bold px-4 py-2 rounded-full mb-7">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+              </span>
+              Now Open &nbsp;·&nbsp; 7 AM – 10 PM &nbsp;·&nbsp; FSSAI Certified
+            </div>
+
+            <!-- Headline -->
+            <h1 class="text-[2.4rem] sm:text-5xl xl:text-[3.4rem] font-black text-gray-900 leading-[1.06] tracking-tight mb-4">
+              Fresh Groceries<br/>
+              Delivered to<br/>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 via-emerald-500 to-primary-500">Your Doorstep.</span>
+            </h1>
+
+            <p class="text-gray-500 text-base max-w-lg mb-8 leading-relaxed">
+              Shop 5,000+ genuine products from 200+ trusted brands — daily essentials, snacks, personal care and more — delivered in under 60 minutes.
+            </p>
+
+            <!-- Search bar -->
+            <div class="flex gap-2 max-w-xl mb-7">
+              <div class="relative flex-1">
+                <div class="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-primary-600 rounded-xl flex items-center justify-center pointer-events-none">
+                  <i class="fa-solid fa-magnifying-glass text-white text-xs"></i>
+                </div>
+                <input id="hero-search" type="text" placeholder="Search for milk, soap, chips..."
+                  class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white focus:border-primary-400 rounded-2xl py-3.5 pl-14 pr-4 text-sm font-medium focus:outline-none transition-all" />
+              </div>
+              <button id="hero-search-btn"
+                class="bg-primary-600 hover:bg-primary-500 active:scale-95 text-white font-black px-6 py-3.5 rounded-2xl transition-all hover:shadow-lg hover:shadow-primary-600/30 text-sm whitespace-nowrap">
+                Search
+              </button>
+            </div>
+
+            <!-- CTA row -->
+            <div class="flex flex-wrap gap-3 mb-9">
+              <a href="/shop"
+                class="inline-flex items-center gap-2.5 bg-gray-900 hover:bg-gray-700 text-white font-black px-7 py-3.5 rounded-2xl transition-all text-sm">
+                <i class="fa-solid fa-cart-shopping text-primary-400"></i>Shop Now
+              </a>
+              <a href="/shop"
+                class="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-500 text-white font-bold px-6 py-3.5 rounded-2xl transition-all hover:shadow-lg hover:shadow-primary-600/30 text-sm">
+                <i class="fa-solid fa-tags text-xs"></i>View Deals
+              </a>
+              <a href="/categories"
+                class="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-6 py-3.5 rounded-2xl transition-all text-sm">
+                <i class="fa-solid fa-border-all text-primary-500 text-xs"></i>Categories
+              </a>
+            </div>
+
+            <!-- Stats strip -->
+            <div class="flex flex-wrap gap-6 pt-6 border-t border-gray-100">
+              {[
+                { icon:'fa-users',        ic:'text-primary-600', bg:'bg-primary-50', num:'10,000+', label:'Happy Customers' },
+                { icon:'fa-building',     ic:'text-blue-600',    bg:'bg-blue-50',    num:'200+',    label:'Trusted Brands' },
+                { icon:'fa-boxes-stacked',ic:'text-violet-600',  bg:'bg-violet-50',  num:'5,000+',  label:'Products Listed' },
+                { icon:'fa-star',         ic:'text-amber-500',   bg:'bg-amber-50',   num:'4.9 / 5', label:'Customer Rating' },
+              ].map(s => (
+                <div class="flex items-center gap-2.5">
+                  <div class={`w-9 h-9 ${s.bg} rounded-xl flex items-center justify-center shrink-0`}>
+                    <i class={`fa-solid ${s.icon} ${s.ic} text-sm`}></i>
+                  </div>
+                  <div>
+                    <div class="font-black text-gray-900 text-sm leading-none">{s.num}</div>
+                    <div class="text-[10px] text-gray-400 font-medium mt-0.5">{s.label}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- ── RIGHT COLUMN ──────────────────────────────────────────── -->
+        <div class="flex flex-col gap-4">
+
+          <!-- ❷ DELIVERY CARD (green) -->
+          <div class="bg-primary-600 rounded-[2rem] p-7 relative overflow-hidden flex-1">
+            <!-- Background watermark icon -->
+            <div class="absolute -right-5 -bottom-5 w-36 h-36 bg-primary-500/50 rounded-3xl flex items-center justify-center rotate-12">
+              <i class="fa-solid fa-truck-fast text-white/20 text-6xl"></i>
+            </div>
+
+            <div class="relative">
+              <div class="w-12 h-12 bg-white/15 rounded-2xl flex items-center justify-center mb-5">
+                <i class="fa-solid fa-truck-fast text-white text-xl"></i>
+              </div>
+
+              <div class="text-primary-200 text-[10px] font-black uppercase tracking-widest mb-1">Express Delivery</div>
+              <div class="text-white font-black text-5xl leading-none mb-1">60<span class="text-2xl font-bold"> min</span></div>
+              <div class="text-primary-200 text-sm mb-5">Same-day delivery across all of Bengaluru</div>
+
+              <div class="space-y-2.5">
+                {[
+                  { icon:'fa-circle-check', text:'Free delivery above ₹499' },
+                  { icon:'fa-circle-check', text:'Live order tracking' },
+                  { icon:'fa-circle-check', text:'Contactless delivery' },
+                ].map(f => (
+                  <div class="flex items-center gap-2.5 text-white/85 text-xs font-medium">
+                    <i class={`fa-solid ${f.icon} text-primary-300 text-xs shrink-0`}></i>
+                    {f.text}
+                  </div>
+                ))}
+              </div>
+
+              <a href="/shop" class="mt-6 flex items-center gap-2 text-white/70 hover:text-white text-xs font-bold transition-colors">
+                Order now <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- ❸ CATEGORY GRID CARD (white) -->
+          <div class="bg-white rounded-[2rem] p-6">
+            <div class="flex items-center justify-between mb-5">
+              <div>
+                <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-0.5">Browse</div>
+                <div class="font-black text-gray-900">Shop by Category</div>
+              </div>
+              <a href="/categories" class="text-xs font-bold text-primary-600 hover:text-primary-700 transition-colors flex items-center gap-1">
+                All <i class="fa-solid fa-chevron-right text-[9px]"></i>
+              </a>
+            </div>
+            <div class="grid grid-cols-3 gap-2.5">
+              {[
+                { href:'/shop?cat=personal-care', icon:'fa-soap',        label:'Personal Care', bg:'bg-emerald-50', ic:'text-primary-600' },
+                { href:'/shop?cat=snacks',        icon:'fa-cookie-bite', label:'Snacks',        bg:'bg-orange-50',  ic:'text-orange-500' },
+                { href:'/shop?cat=beverages',     icon:'fa-glass-water', label:'Beverages',     bg:'bg-blue-50',    ic:'text-blue-500' },
+                { href:'/shop?cat=household',     icon:'fa-broom',       label:'Household',     bg:'bg-purple-50',  ic:'text-purple-500' },
+                { href:'/shop?cat=dairy',         icon:'fa-droplet',     label:'Dairy',         bg:'bg-amber-50',   ic:'text-amber-500' },
+                { href:'/shop?cat=bakery',        icon:'fa-bread-slice', label:'Bakery',        bg:'bg-rose-50',    ic:'text-rose-500' },
+              ].map(c => (
+                <a href={c.href}
+                  class={`flex flex-col items-center gap-1.5 p-3 ${c.bg} rounded-2xl hover:opacity-80 active:scale-95 transition-all cursor-pointer`}>
+                  <i class={`fa-solid ${c.icon} ${c.ic} text-xl`}></i>
+                  <span class="text-[9px] font-bold text-gray-600 text-center leading-tight">{c.label}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+        </div><!-- end right col -->
+      </div><!-- end bento grid -->
+
+      <!-- ── TRUST BAR (below bento, dark) ──────────────────────────── -->
+      <div class="mt-4 bg-white/5 border border-white/8 rounded-2xl px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+        {[
+          { icon:'fa-leaf',          label:'100% Fresh & Genuine' },
+          { icon:'fa-shield-halved', label:'Secure Payments' },
+          { icon:'fa-rotate-left',   label:'Easy 7-Day Returns' },
+          { icon:'fa-headset',       label:'24/7 Customer Support' },
+          { icon:'fa-certificate',   label:'FSSAI Certified Store' },
+        ].map(t => (
+          <div class="flex items-center gap-2.5 text-white/60 text-xs font-medium">
+            <i class={`fa-solid ${t.icon} text-primary-400 text-sm`}></i>
+            {t.label}
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ CATEGORIES ══════════════════════════════════════════════════ -->
+  <section class="py-10 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <p class="section-label">Shop by</p>
+          <h2 class="section-title">Categories</h2>
+        </div>
+        <a href="/categories" class="text-sm font-semibold text-primary-600 hover:text-primary-700 flex items-center gap-1.5 transition-colors">
+          All categories <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-3">
+        {[
+          { href:'/shop?cat=personal-care', icon:'fa-soap',         label:'Personal Care', bg:'bg-emerald-50',  ic:'text-primary-600',  hover:'hover:bg-primary-100 hover:border-primary-300' },
+          { href:'/shop?cat=snacks',        icon:'fa-cookie-bite',   label:'Snacks',        bg:'bg-orange-50',   ic:'text-orange-500',   hover:'hover:bg-orange-100 hover:border-orange-300' },
+          { href:'/shop?cat=beverages',     icon:'fa-glass-water',   label:'Beverages',     bg:'bg-blue-50',     ic:'text-blue-500',     hover:'hover:bg-blue-100 hover:border-blue-300' },
+          { href:'/shop?cat=household',     icon:'fa-broom',         label:'Household',     bg:'bg-purple-50',   ic:'text-purple-500',   hover:'hover:bg-purple-100 hover:border-purple-300' },
+          { href:'/shop?cat=dairy',         icon:'fa-droplet',       label:'Dairy',         bg:'bg-amber-50',    ic:'text-amber-500',    hover:'hover:bg-amber-100 hover:border-amber-300' },
+          { href:'/shop?cat=bakery',        icon:'fa-bread-slice',   label:'Bakery',        bg:'bg-rose-50',     ic:'text-rose-500',     hover:'hover:bg-rose-100 hover:border-rose-300' },
+        ].map(c => (
+          <a href={c.href} class={`group flex flex-col items-center gap-3 p-4 sm:p-5 rounded-3xl ${c.bg} border-2 border-transparent ${c.hover} transition-all duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer`}>
+            <div class={`w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-200`}>
+              <i class={`fa-solid ${c.icon} ${c.ic} text-xl`}></i>
+            </div>
+            <span class="text-xs font-bold text-gray-700 text-center leading-tight">{c.label}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURED PRODUCTS ══════════════════════════════════════════ -->
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <p class="section-label">Handpicked for you</p>
+          <h2 class="section-title">Featured Products</h2>
+        </div>
+        <a href="/shop" class="text-sm font-semibold text-primary-600 hover:text-primary-700 flex items-center gap-1.5 transition-colors">
+          View all <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+      <div id="featured-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <!-- JS populated -->
+        {Array(5).fill(null).map(() => (
+          <div class="rounded-3xl overflow-hidden border border-gray-100 bg-white">
+            <div class="skeleton aspect-square w-full"></div>
+            <div class="p-4 space-y-2">
+              <div class="skeleton h-3 w-16 rounded-full"></div>
+              <div class="skeleton h-4 rounded-lg"></div>
+              <div class="skeleton h-4 w-3/4 rounded-lg"></div>
+              <div class="skeleton h-4 w-12 rounded-full mt-2"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DEAL BANNER ════════════════════════════════════════════════ -->
+  <section class="py-8 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Banner 1 -->
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary-600 to-emerald-500 p-6 sm:p-7 flex items-center gap-5 sm:gap-6">
+          <div class="absolute right-4 top-1/2 -translate-y-1/2 w-28 h-28 bg-white/10 rounded-3xl flex items-center justify-center">
+            <i class="fa-solid fa-leaf text-white/20 text-7xl"></i>
+          </div>
+          <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/15 backdrop-blur rounded-2xl flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-soap text-white text-3xl sm:text-4xl"></i>
+          </div>
+          <div class="z-10">
+            <div class="text-white/70 text-xs font-bold uppercase tracking-widest mb-1">Personal Care</div>
+            <div class="text-white font-black text-xl sm:text-2xl leading-tight mb-1.5">Up to 30% off</div>
+            <div class="text-white/80 text-sm mb-4">On all soaps, shampoos &amp; more</div>
+            <a href="/shop?cat=personal-care" class="inline-flex items-center gap-2 bg-white text-primary-700 font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-primary-50 transition-colors">
+              Shop Now <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </div>
+        <!-- Banner 2 -->
+        <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-rose-500 to-orange-400 p-6 sm:p-7 flex items-center gap-5 sm:gap-6">
+          <div class="absolute right-4 top-1/2 -translate-y-1/2 w-28 h-28 bg-white/10 rounded-3xl flex items-center justify-center">
+            <i class="fa-solid fa-bolt text-white/20 text-7xl"></i>
+          </div>
+          <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white/15 backdrop-blur rounded-2xl flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-cookie-bite text-white text-3xl sm:text-4xl"></i>
+          </div>
+          <div class="z-10">
+            <div class="text-white/70 text-xs font-bold uppercase tracking-widest mb-1">Snacks &amp; Chocolates</div>
+            <div class="text-white font-black text-xl sm:text-2xl leading-tight mb-1.5">Best deals today</div>
+            <div class="text-white/80 text-sm mb-4">Chocolates, chips, cookies &amp; more</div>
+            <a href="/shop?cat=snacks" class="inline-flex items-center gap-2 bg-white text-rose-600 font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-rose-50 transition-colors">
+              Shop Now <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TODAY'S DEALS ══════════════════════════════════════════════ -->
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <p class="section-label">Limited Time</p>
+          <h2 class="section-title flex items-center gap-3">Today's Best Deals <span class="inline-flex items-center justify-center w-8 h-8 bg-rose-100 rounded-xl"><i class="fa-solid fa-fire text-rose-500 text-sm"></i></span></h2>
+        </div>
+        <a href="/shop" class="text-sm font-semibold text-primary-600 hover:text-primary-700 flex items-center gap-1.5 transition-colors">
+          See all <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+      <div id="deals-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {Array(5).fill(null).map(() => (
+          <div class="rounded-3xl overflow-hidden border border-gray-100 bg-white">
+            <div class="skeleton aspect-square w-full"></div>
+            <div class="p-4 space-y-2">
+              <div class="skeleton h-3 w-16 rounded-full"></div>
+              <div class="skeleton h-4 rounded-lg"></div>
+              <div class="skeleton h-4 w-12 rounded-full mt-2"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ WHY US ══════════════════════════════════════════════════════ -->
+  <section class="py-16 bg-[#0b1120]">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <p class="section-label text-primary-400">Why Choose Us</p>
+        <h2 class="text-3xl font-black text-white">The AAYI Mart Promise</h2>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { icon:'fa-leaf', color:'from-primary-500 to-emerald-400', title:'100% Fresh', desc:'Every product checked for freshness. No expired items — ever.' },
+          { icon:'fa-tags', color:'from-amber-500 to-orange-400',    title:'Best Prices', desc:'Everyday low prices with weekly deals. No hidden charges.' },
+          { icon:'fa-truck-fast', color:'from-blue-500 to-sky-400',  title:'Fast Delivery', desc:'Same-day delivery within 60 minutes for orders placed by 8 PM.' },
+          { icon:'fa-headset', color:'from-purple-500 to-violet-400',title:'24/7 Support', desc:'Our care team is always here to assist you.' },
+        ].map(item => (
+          <div class="bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-7 hover:bg-white/8 transition-colors">
+            <div class={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center mb-5 shadow-lg`}>
+              <i class={`fa-solid ${item.icon} text-white text-lg`}></i>
+            </div>
+            <h3 class="font-black text-white text-base mb-2">{item.title}</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ NEWSLETTER ═════════════════════════════════════════════════ -->
+  <section class="py-14 bg-white">
+    <div class="max-w-xl mx-auto px-4 text-center">
+      <div class="w-16 h-16 bg-primary-50 rounded-3xl flex items-center justify-center mx-auto mb-6">
+        <i class="fa-solid fa-envelope-open-text text-primary-600 text-2xl"></i>
+      </div>
+      <h2 class="text-2xl font-black text-gray-900 mb-2">Get Weekly Deals</h2>
+      <p class="text-gray-500 text-sm mb-8">Subscribe for exclusive offers, fresh arrivals, and deals every week.</p>
+      <form id="newsletter-form" class="flex gap-2 max-w-sm mx-auto">
+        <input type="email" placeholder="your@email.com" class="flex-1 bg-gray-100 border-2 border-transparent focus:border-primary-400 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:bg-white transition-all" required />
+        <button type="submit" class="btn-primary px-5 py-3 whitespace-nowrap text-sm">Subscribe</button>
+      </form>
+      <p class="text-xs text-gray-400 mt-3">No spam. Unsubscribe anytime.</p>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<script is:inline>
+  function renderCard(p) {
+    const d = p.originalPrice > p.price ? Math.round((1 - p.price / p.originalPrice) * 100) : 0;
+    return `
+      <div class="product-card flex flex-col">
+        <div class="relative overflow-hidden bg-gradient-to-br from-slate-50 to-gray-100" style="aspect-ratio:1/1">
+          <img src="${p.image}" alt="${p.name}" class="product-img w-full h-full object-contain p-4" loading="lazy"
+            onerror="this.onerror=null;this.src='https://placehold.co/400x400/16a34a/ffffff?text=${encodeURIComponent(p.name.slice(0,12))}'" />
+          ${d > 0 ? `<div class="badge-discount"><i class="fa-solid fa-bolt text-[8px]"></i>${d}% OFF</div>` : ''}
+          ${p.featured && !d ? `<div class="badge-new">NEW</div>` : ''}
+          ${p.stock === 0 ? `<div class="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-20"><span class="bg-gray-900 text-white text-xs font-bold px-4 py-1.5 rounded-full">Out of Stock</span></div>` : ''}
+          ${p.stock > 0 ? `
+          <div class="quick-add-overlay absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-3">
+            <button onclick='window.addToCart(${JSON.stringify(p)})' class="w-full bg-white text-gray-900 font-bold text-xs py-2.5 rounded-2xl hover:bg-primary-50 active:scale-95 transition-all">
+              <i class="fa-solid fa-cart-plus mr-1.5 text-primary-600"></i>Quick Add
+            </button>
+          </div>` : ''}
+        </div>
+        <div class="p-4 flex flex-col flex-1">
+          <p class="text-[10px] font-black text-primary-600 uppercase tracking-widest mb-1">${p.brand}</p>
+          <h3 class="font-semibold text-gray-900 text-sm leading-snug line-clamp-2 flex-1 mb-2 min-h-[2.5rem]">${p.name}</h3>
+          <span class="text-[10px] text-gray-400 font-medium bg-gray-100 px-2 py-0.5 rounded-md w-fit mb-3">${p.unit}</span>
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-baseline gap-1.5">
+              <span class="text-base font-black text-gray-900">₹${p.price}</span>
+              ${d > 0 ? `<span class="text-xs text-gray-400 line-through">₹${p.originalPrice}</span>` : ''}
+            </div>
+            <button ${p.stock === 0 ? 'disabled' : ''} onclick='window.addToCart(${JSON.stringify(p)})'
+              class="w-9 h-9 ${p.stock === 0 ? 'bg-gray-200 cursor-not-allowed' : 'bg-primary-600 hover:bg-primary-500 active:scale-90 shadow-md shadow-primary-600/25'} text-white rounded-xl flex items-center justify-center transition-all shrink-0">
+              <i class="fa-solid fa-plus text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const products = window.getProducts();
+
+    const featGrid = document.getElementById('featured-grid');
+    const featured = products.filter(p => p.featured).slice(0, 10);
+    featGrid.innerHTML = featured.length
+      ? featured.map(renderCard).join('')
+      : '<div class="col-span-full text-center py-8 text-gray-400">No featured products.</div>';
+
+    const dealsGrid = document.getElementById('deals-grid');
+    const deals = products.filter(p => p.originalPrice > p.price).slice(0, 10);
+    dealsGrid.innerHTML = deals.length
+      ? deals.map(renderCard).join('')
+      : '<div class="col-span-full text-center py-8 text-gray-400">No deals available.</div>';
+  });
+
+  // Hero search
+  const hBtn = document.getElementById('hero-search-btn');
+  const hInput = document.getElementById('hero-search');
+  function heroSearch() {
+    const q = hInput.value.trim();
+    if (q) window.location.href = `/shop?q=${encodeURIComponent(q)}`;
+  }
+  hBtn.addEventListener('click', heroSearch);
+  hInput.addEventListener('keydown', e => { if (e.key === 'Enter') heroSearch(); });
+  document.querySelectorAll('.hero-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = btn.textContent.trim();
+      window.location.href = `/shop?q=${encodeURIComponent(q)}`;
+    });
+  });
+
+  // Newsletter
+  document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    window.showToast('Subscribed successfully!');
+    this.reset();
+  });
+</script>

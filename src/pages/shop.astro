@@ -1,0 +1,241 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Shop — All Products">
+  <Header activePage="shop" />
+
+  <div class="bg-gray-50 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+
+      <!-- Page header -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h1 class="text-2xl font-black text-gray-900 tracking-tight">All Products</h1>
+          <p id="product-count" class="text-sm text-gray-400 mt-0.5 font-medium">Loading...</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <label class="text-sm text-gray-500 font-medium whitespace-nowrap hidden sm:block">Sort:</label>
+          <select id="sort-select" class="bg-white border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 font-medium text-gray-700">
+            <option value="default">Featured First</option>
+            <option value="price-asc">Price: Low → High</option>
+            <option value="price-desc">Price: High → Low</option>
+            <option value="name">Name A–Z</option>
+            <option value="discount">Best Discount</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Mobile category pills (horizontal scroll) -->
+      <div class="md:hidden flex gap-2 overflow-x-auto pb-4 mb-6 -mx-4 px-4 scrollbar-hide">
+        {[
+          { val:'all', label:'All', emoji:'🛒' },
+          { val:'personal-care', label:'Personal Care', emoji:'🧴' },
+          { val:'snacks',        label:'Snacks',         emoji:'🍫' },
+          { val:'beverages',     label:'Beverages',      emoji:'🧃' },
+          { val:'household',     label:'Household',      emoji:'🧹' },
+          { val:'dairy',         label:'Dairy',          emoji:'🥛' },
+          { val:'bakery',        label:'Bakery',         emoji:'🍞' },
+        ].map(c => (
+          <button class="mob-cat-btn flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-all" data-cat={c.val}>
+            <span>{c.emoji}</span><span>{c.label}</span>
+          </button>
+        ))}
+      </div>
+
+      <div class="flex gap-6">
+        <!-- Desktop sidebar -->
+        <aside class="w-60 shrink-0 hidden md:block">
+          <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 sticky top-28">
+            <h3 class="font-black text-gray-900 mb-5 text-sm uppercase tracking-widest">Filters</h3>
+
+            <!-- Category -->
+            <div class="mb-6">
+              <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Category</h4>
+              <div class="space-y-1">
+                {[
+                  { val:'all',          label:'All Products',    emoji:'🛒' },
+                  { val:'personal-care',label:'Personal Care',   emoji:'🧴' },
+                  { val:'snacks',       label:'Snacks & Chocs',  emoji:'🍫' },
+                  { val:'beverages',    label:'Beverages',       emoji:'🧃' },
+                  { val:'household',    label:'Household',       emoji:'🧹' },
+                  { val:'dairy',        label:'Dairy & Eggs',    emoji:'🥛' },
+                  { val:'bakery',       label:'Bakery',          emoji:'🍞' },
+                ].map(c => (
+                  <label class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors group">
+                    <input type="radio" name="cat" value={c.val} class="accent-primary-600 w-4 h-4" checked={c.val === 'all'} />
+                    <span class="text-sm">{c.emoji}</span>
+                    <span class="text-sm font-medium text-gray-700 group-hover:text-gray-900">{c.label}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <!-- Price range -->
+            <div class="mb-6">
+              <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Price Range</h4>
+              <div class="flex items-center gap-2">
+                <input id="price-min" type="number" placeholder="₹ Min" min="0" class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 focus:bg-white transition-all" />
+                <span class="text-gray-300 font-bold">–</span>
+                <input id="price-max" type="number" placeholder="₹ Max" min="0" class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 focus:bg-white transition-all" />
+              </div>
+              <button id="apply-price" class="mt-3 w-full bg-gray-50 hover:bg-primary-50 hover:text-primary-600 text-gray-600 font-semibold text-xs py-2 rounded-xl transition-colors border border-gray-200">
+                Apply Price Filter
+              </button>
+            </div>
+
+            <!-- In stock -->
+            <label class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 cursor-pointer mb-5 transition-colors">
+              <input type="checkbox" id="in-stock-only" class="accent-primary-600 w-4 h-4 rounded" />
+              <span class="text-sm font-medium text-gray-700">In Stock Only</span>
+            </label>
+
+            <button id="clear-filters" class="w-full text-xs font-bold text-gray-400 hover:text-gray-700 border border-gray-200 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+              ✕ Clear All Filters
+            </button>
+          </div>
+        </aside>
+
+        <!-- Product grid area -->
+        <div class="flex-1 min-w-0">
+          <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- Loading skeletons -->
+            {Array(8).fill(null).map(() => (
+              <div class="rounded-3xl overflow-hidden border border-gray-100 bg-white">
+                <div class="skeleton aspect-square w-full"></div>
+                <div class="p-4 space-y-2">
+                  <div class="skeleton h-3 w-16 rounded-full"></div>
+                  <div class="skeleton h-4 rounded-lg"></div>
+                  <div class="skeleton h-4 w-3/4 rounded-lg"></div>
+                  <div class="flex justify-between items-center mt-3">
+                    <div class="skeleton h-5 w-12 rounded-full"></div>
+                    <div class="skeleton w-9 h-9 rounded-xl"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div id="no-results" class="hidden text-center py-20">
+            <div class="text-6xl mb-5">🔍</div>
+            <h3 class="text-xl font-black text-gray-900 mb-2">Nothing found</h3>
+            <p class="text-gray-500 mb-7">Try different search terms or clear the filters</p>
+            <button onclick="document.getElementById('clear-filters').click()" class="btn-primary">Clear Filters</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
+
+<script is:inline>
+  let allProducts = [];
+  let filters = { cat:'all', q:'', minPrice:null, maxPrice:null, inStock:false };
+  let sortBy = 'default';
+
+  function getDiscount(p) { return p.originalPrice > p.price ? Math.round((1-p.price/p.originalPrice)*100) : 0; }
+
+  function renderCard(p) {
+    const d = getDiscount(p);
+    return `
+      <div class="product-card flex flex-col">
+        <div class="relative overflow-hidden bg-gradient-to-br from-slate-50 to-gray-100" style="aspect-ratio:1/1">
+          <img src="${p.image}" alt="${p.name}" class="product-img w-full h-full object-contain p-4" loading="lazy"
+            onerror="this.onerror=null;this.src='https://placehold.co/400x400/16a34a/ffffff?text=${encodeURIComponent(p.name.slice(0,12))}'" />
+          ${d > 0 ? `<div class="badge-discount"><i class="fa-solid fa-bolt text-[8px]"></i>${d}% OFF</div>` : ''}
+          ${p.stock > 0 && p.stock < 10 ? `<div class="absolute top-2.5 right-2.5 bg-amber-400 text-white text-[10px] font-black px-2 py-0.5 rounded-full">Only ${p.stock} left!</div>` : ''}
+          ${p.stock === 0 ? `<div class="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-20"><span class="bg-gray-900 text-white text-xs font-bold px-4 py-1.5 rounded-full">Out of Stock</span></div>` : ''}
+          ${p.stock > 0 ? `
+          <div class="quick-add-overlay absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-3">
+            <button onclick='window.addToCart(${JSON.stringify(p)})' class="w-full bg-white text-gray-900 font-bold text-xs py-2.5 rounded-2xl hover:bg-primary-50 active:scale-95 transition-all">
+              <i class="fa-solid fa-cart-plus mr-1.5 text-primary-600"></i>Quick Add
+            </button>
+          </div>` : ''}
+        </div>
+        <div class="p-4 flex flex-col flex-1">
+          <p class="text-[10px] font-black text-primary-600 uppercase tracking-widest mb-1">${p.brand}</p>
+          <h3 class="font-semibold text-gray-900 text-sm leading-snug line-clamp-2 flex-1 mb-2 min-h-[2.5rem]">${p.name}</h3>
+          <span class="text-[10px] text-gray-400 font-medium bg-gray-100 px-2 py-0.5 rounded-md w-fit mb-3">${p.unit}</span>
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-baseline gap-1.5">
+              <span class="text-base font-black text-gray-900">₹${p.price}</span>
+              ${d > 0 ? `<span class="text-xs text-gray-400 line-through">₹${p.originalPrice}</span>` : ''}
+            </div>
+            <button ${p.stock === 0 ? 'disabled' : ''} onclick='window.addToCart(${JSON.stringify(p)})'
+              class="w-9 h-9 ${p.stock === 0 ? 'bg-gray-200 cursor-not-allowed' : 'bg-primary-600 hover:bg-primary-500 active:scale-90 shadow-md shadow-primary-600/25'} text-white rounded-xl flex items-center justify-center transition-all shrink-0">
+              <i class="fa-solid fa-plus text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function render() {
+    let result = [...allProducts];
+    if (filters.cat !== 'all') result = result.filter(p => p.category === filters.cat);
+    if (filters.q) { const q = filters.q.toLowerCase(); result = result.filter(p => p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q)); }
+    if (filters.minPrice !== null) result = result.filter(p => p.price >= filters.minPrice);
+    if (filters.maxPrice !== null) result = result.filter(p => p.price <= filters.maxPrice);
+    if (filters.inStock) result = result.filter(p => p.stock > 0);
+    if (sortBy === 'price-asc') result.sort((a,b) => a.price-b.price);
+    else if (sortBy === 'price-desc') result.sort((a,b) => b.price-a.price);
+    else if (sortBy === 'name') result.sort((a,b) => a.name.localeCompare(b.name));
+    else if (sortBy === 'discount') result.sort((a,b) => getDiscount(b)-getDiscount(a));
+    else result.sort((a,b) => (b.featured?1:0)-(a.featured?1:0));
+
+    const grid = document.getElementById('products-grid');
+    const noRes = document.getElementById('no-results');
+    document.getElementById('product-count').textContent = `${result.length} product${result.length !== 1 ? 's' : ''} found`;
+    if (!result.length) { grid.innerHTML = ''; noRes.classList.remove('hidden'); }
+    else { noRes.classList.add('hidden'); grid.innerHTML = result.map(renderCard).join(''); }
+  }
+
+  function updateMobBtns(cat) {
+    document.querySelectorAll('.mob-cat-btn').forEach(b => {
+      const active = b.dataset.cat === cat;
+      b.className = `mob-cat-btn flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-all ${active ? 'bg-primary-600 text-white shadow-md shadow-primary-600/30' : 'bg-white text-gray-600 border border-gray-200'}`;
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    allProducts = window.getProducts();
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('cat')) { filters.cat = params.get('cat'); const r = document.querySelector(`input[name="cat"][value="${filters.cat}"]`); if (r) r.checked = true; }
+    if (params.get('q')) filters.q = params.get('q');
+    updateMobBtns(filters.cat);
+    render();
+
+    document.querySelectorAll('input[name="cat"]').forEach(r => r.addEventListener('change', () => { filters.cat = r.value; updateMobBtns(r.value); render(); }));
+    document.querySelectorAll('.mob-cat-btn').forEach(b => b.addEventListener('click', () => {
+      filters.cat = b.dataset.cat;
+      updateMobBtns(b.dataset.cat);
+      const radio = document.querySelector(`input[name="cat"][value="${filters.cat}"]`);
+      if (radio) radio.checked = true;
+      render();
+    }));
+    document.getElementById('sort-select').addEventListener('change', function() { sortBy = this.value; render(); });
+    document.getElementById('apply-price').addEventListener('click', () => {
+      const mn = parseFloat(document.getElementById('price-min').value);
+      const mx = parseFloat(document.getElementById('price-max').value);
+      filters.minPrice = isNaN(mn) ? null : mn;
+      filters.maxPrice = isNaN(mx) ? null : mx;
+      render();
+    });
+    document.getElementById('in-stock-only').addEventListener('change', function() { filters.inStock = this.checked; render(); });
+    document.getElementById('clear-filters').addEventListener('click', () => {
+      filters = { cat:'all', q:'', minPrice:null, maxPrice:null, inStock:false };
+      document.querySelector('input[name="cat"][value="all"]').checked = true;
+      document.getElementById('price-min').value = '';
+      document.getElementById('price-max').value = '';
+      document.getElementById('in-stock-only').checked = false;
+      document.getElementById('sort-select').value = 'default';
+      sortBy = 'default';
+      updateMobBtns('all');
+      render();
+    });
+  });
+</script>

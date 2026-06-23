@@ -1,0 +1,305 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="My Cart">
+  <Header activePage="cart" />
+
+  <div class="max-w-7xl mx-auto px-4 py-10">
+    <h1 class="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-3">
+      <i class="fa-solid fa-cart-shopping text-primary-600"></i>
+      My Cart
+      <span id="cart-item-count" class="text-sm font-normal text-gray-500"
+      ></span>
+    </h1>
+
+    <!-- Empty state -->
+    <div id="empty-cart" class="hidden text-center py-20">
+      <div class="text-7xl mb-6">🛒</div>
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h2>
+      <p class="text-gray-500 mb-8">
+        Looks like you haven't added anything to your cart yet.
+      </p>
+      <a href="/shop" class="btn-primary text-base px-8 py-3.5">
+        <i class="fa-solid fa-store mr-2"></i>Start Shopping
+      </a>
+    </div>
+
+    <!-- Cart content -->
+    <div id="cart-content" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Items list -->
+      <div class="lg:col-span-2">
+        <div class="bg-white rounded-2xl shadow-card overflow-hidden">
+          <div
+            class="p-4 border-b border-gray-100 flex items-center justify-between"
+          >
+            <span class="font-semibold text-gray-900">Cart Items</span>
+            <button
+              id="clear-cart-btn"
+              class="text-xs text-red-500 hover:text-red-700 font-medium transition-colors"
+            >
+              <i class="fa-solid fa-trash-can mr-1"></i>Clear Cart
+            </button>
+          </div>
+          <div id="cart-items-list" class="divide-y divide-gray-100">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Order summary -->
+      <div>
+        <div class="bg-white rounded-2xl shadow-card p-6 sticky top-24">
+          <h3 class="font-bold text-gray-900 text-lg mb-5">Order Summary</h3>
+
+          <div class="space-y-3 mb-5">
+            <div class="flex justify-between text-sm text-gray-600">
+              <span>Subtotal</span>
+              <span id="subtotal" class="font-medium text-gray-900">₹0</span>
+            </div>
+            <div class="flex justify-between text-sm text-gray-600">
+              <span>Delivery Charge</span>
+              <span id="delivery-charge" class="font-medium text-gray-900"
+                >₹40</span
+              >
+            </div>
+            <div
+              id="free-delivery-msg"
+              class="hidden text-xs text-primary-600 font-medium bg-primary-50 rounded-lg px-3 py-2"
+            >
+              <i class="fa-solid fa-truck-fast mr-1"></i>You qualify for FREE
+              delivery!
+            </div>
+            <div class="flex justify-between text-sm text-green-600">
+              <span>Savings</span>
+              <span id="savings" class="font-medium">₹0</span>
+            </div>
+          </div>
+
+          <div class="border-t border-gray-100 pt-4 mb-6">
+            <div class="flex justify-between text-base font-bold text-gray-900">
+              <span>Total</span>
+              <span id="total">₹0</span>
+            </div>
+            <p class="text-xs text-gray-400 mt-1">Inclusive of all taxes</p>
+          </div>
+
+          <!-- Promo code -->
+          <div class="mb-5">
+            <div class="flex gap-2">
+              <input
+                id="promo-input"
+                type="text"
+                placeholder="Promo code"
+                class="input-field flex-1 text-sm"
+              />
+              <button
+                id="apply-promo"
+                class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold px-3 py-2 rounded-lg text-sm transition-colors"
+                >Apply</button
+              >
+            </div>
+            <p id="promo-msg" class="text-xs mt-1 hidden"></p>
+          </div>
+
+          <button id="checkout-btn" class="btn-primary w-full py-3.5 text-base">
+            <i class="fa-solid fa-lock mr-2"></i>Proceed to Checkout
+          </button>
+
+          <div
+            class="mt-4 flex items-center justify-center gap-4 text-xs text-gray-400"
+          >
+            <span class="flex items-center gap-1"
+              ><i class="fa-solid fa-shield-halved text-primary-500"></i>Secure
+              Checkout</span
+            >
+            <span class="flex items-center gap-1"
+              ><i class="fa-solid fa-rotate-left text-primary-500"></i>Easy
+              Returns</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suggested products -->
+    <div class="mt-14">
+      <h2 class="text-xl font-bold text-gray-900 mb-6">You Might Also Like</h2>
+      <div
+        id="suggested-products"
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
+      >
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
+
+<script is:inline>
+  const PROMO_CODES = {
+    FRESH10: 10,
+    SAVE20: 20,
+    FIRSTORDER: 15,
+  };
+  let promoDiscount = 0;
+
+  function renderCartItem(item) {
+    const subtotal = item.price * item.qty;
+    return `
+      <div class="flex items-start sm:items-center gap-4 p-4" data-id="${item.id}">
+        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 sm:w-20 sm:h-20 object-contain rounded-xl bg-gray-50 shrink-0 p-1" onerror="this.src='https://placehold.co/100x100/16a34a/ffffff?text=P'" />
+        <div class="flex-1 min-w-0">
+          <p class="text-xs text-gray-400">${item.brand}</p>
+          <h4 class="font-semibold text-gray-900 text-sm leading-tight">${item.name}</h4>
+          <p class="text-xs text-gray-400">${item.unit}</p>
+          <div class="flex items-center justify-between mt-2 gap-3">
+            <span class="font-bold text-gray-900">₹${subtotal}</span>
+            <div class="flex items-center gap-2">
+              <button onclick="changeQty('${item.id}', -1)" class="w-7 h-7 bg-gray-100 hover:bg-gray-200 rounded-lg flex items-center justify-center text-gray-700 font-bold transition-colors">−</button>
+              <span class="w-6 text-center text-sm font-semibold">${item.qty}</span>
+              <button onclick="changeQty('${item.id}', 1)" class="w-7 h-7 bg-primary-600 hover:bg-primary-700 rounded-lg flex items-center justify-center text-white font-bold transition-colors">+</button>
+              <button onclick="removeItem('${item.id}')" class="w-7 h-7 bg-red-50 hover:bg-red-100 rounded-lg flex items-center justify-center text-red-500 transition-colors ml-1">
+                <i class="fa-solid fa-trash-can text-xs"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function renderMiniCard(p) {
+    return `
+      <div class="product-card flex flex-col">
+        <div class="bg-gray-50">
+          <img src="${p.image}" alt="${p.name}" class="w-full aspect-square object-contain p-3" loading="lazy" onerror="this.src='https://placehold.co/200x200/16a34a/ffffff?text=P'" />
+        </div>
+        <div class="p-2.5">
+          <h4 class="text-xs font-semibold text-gray-900 line-clamp-2 mb-2">${p.name}</h4>
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-sm">₹${p.price}</span>
+            <button onclick='window.addToCart(${JSON.stringify(p)})' class="w-6 h-6 bg-primary-600 hover:bg-primary-700 text-white rounded-md flex items-center justify-center transition-colors">
+              <i class="fa-solid fa-plus text-[9px]"></i>
+            </button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function updateSummary() {
+    const cart = window.getCart();
+    let subtotal = 0;
+    let savings = 0;
+    cart.forEach((item) => {
+      subtotal += item.price * item.qty;
+      if (item.originalPrice > item.price)
+        savings += (item.originalPrice - item.price) * item.qty;
+    });
+    const delivery = subtotal >= 499 ? 0 : 40;
+    const total = subtotal + delivery - promoDiscount;
+
+    document.getElementById("subtotal").textContent = `₹${subtotal}`;
+    document.getElementById("delivery-charge").textContent =
+      delivery === 0 ? "FREE" : `₹${delivery}`;
+    document.getElementById("savings").textContent =
+      `−₹${savings + promoDiscount}`;
+    document.getElementById("total").textContent = `₹${Math.max(0, total)}`;
+
+    const freeMsg = document.getElementById("free-delivery-msg");
+    if (delivery === 0) freeMsg.classList.remove("hidden");
+    else freeMsg.classList.add("hidden");
+  }
+
+  function renderCart() {
+    const cart = window.getCart();
+    const empty = document.getElementById("empty-cart");
+    const content = document.getElementById("cart-content");
+    const countEl = document.getElementById("cart-item-count");
+    const listEl = document.getElementById("cart-items-list");
+
+    const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+    countEl.textContent = `(${totalItems} item${totalItems !== 1 ? "s" : ""})`;
+
+    if (cart.length === 0) {
+      empty.classList.remove("hidden");
+      content.classList.add("hidden");
+    } else {
+      empty.classList.add("hidden");
+      content.classList.remove("hidden");
+      listEl.innerHTML = cart.map(renderCartItem).join("");
+      updateSummary();
+    }
+  }
+
+  window.changeQty = function (id, delta) {
+    const cart = window.getCart();
+    const idx = cart.findIndex((i) => i.id === id);
+    if (idx === -1) return;
+    cart[idx].qty += delta;
+    if (cart[idx].qty <= 0) cart.splice(idx, 1);
+    window.saveCart(cart);
+    renderCart();
+  };
+
+  window.removeItem = function (id) {
+    const cart = window.getCart().filter((i) => i.id !== id);
+    window.saveCart(cart);
+    renderCart();
+    window.showToast("Item removed from cart");
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    renderCart();
+
+    // Clear cart
+    document.getElementById("clear-cart-btn").addEventListener("click", () => {
+      if (confirm("Clear all items from cart?")) {
+        window.saveCart([]);
+        renderCart();
+        window.showToast("Cart cleared", "error");
+      }
+    });
+
+    // Promo code
+    document.getElementById("apply-promo").addEventListener("click", () => {
+      const code = document
+        .getElementById("promo-input")
+        .value.trim()
+        .toUpperCase();
+      const msg = document.getElementById("promo-msg");
+      msg.classList.remove("hidden");
+      if (PROMO_CODES[code]) {
+        promoDiscount = PROMO_CODES[code];
+        msg.textContent = `✓ ${code} applied! ₹${promoDiscount} off`;
+        msg.className = "text-xs mt-1 text-primary-600 font-medium";
+        updateSummary();
+      } else {
+        promoDiscount = 0;
+        msg.textContent = "✗ Invalid promo code";
+        msg.className = "text-xs mt-1 text-red-500";
+        updateSummary();
+      }
+    });
+
+    // Checkout
+    document.getElementById("checkout-btn").addEventListener("click", () => {
+      window.showToast("Checkout feature coming soon!");
+    });
+
+    // Suggested products
+    const allProducts = window.getProducts();
+    const cart = window.getCart();
+    const cartIds = cart.map((i) => i.id);
+    const suggested = allProducts
+      .filter((p) => !cartIds.includes(p.id))
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 6);
+    const sugGrid = document.getElementById("suggested-products");
+    if (suggested.length) {
+      sugGrid.innerHTML = suggested.map(renderMiniCard).join("");
+    }
+  });
+</script>

@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="AAYI Mart — Fresh groceries delivered fast."><title>Shop — All Products — AAYI Mart</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><link rel="stylesheet" href="/_astro/about.axP4w4HN.css"></head> <body class="bg-gray-50 text-gray-900 antialiased">  <header class="bg-white sticky top-0 z-50" id="site-header"> <div class="border-b border-gray-100"> <div class="max-w-7xl mx-auto px-4 sm:px-6"> <!-- 3-column grid: logo | search (centred) | actions --> <div class="grid grid-cols-[auto_1fr_auto] items-center h-16 gap-4"> <!-- Logo --> <a href="/" class="flex items-center gap-2.5 shrink-0"> <div class="leading-none"> <div class="font-black text-base text-gray-900 tracking-tight"> <img src="/aayi-logo.png" alt="AAYI Mart logo" width="100" height="40" class="object-contain"> </div> <div class="text-[10px] font-bold text-primary-600 tracking-widest uppercase hidden sm:block">Supermarket</div> </div> </a> <!-- Search bar — centred in its column --> <div class="hidden md:flex justify-center"> <div class="relative w-full max-w-xl"> <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none"></i> <input id="header-search" type="text" placeholder="Search products, brands..." class="w-full bg-gray-100 hover:bg-gray-50 focus:bg-white border-2 border-transparent focus:border-primary-300 rounded-2xl px-4 py-2.5 pl-10 pr-28 text-sm focus:outline-none focus:ring-2 focus:ring-primary-100 transition-all placeholder:text-gray-400" autocomplete="off"> <button id="search-btn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary-600 hover:bg-primary-500 text-white text-xs font-bold px-4 py-1.5 rounded-xl transition-colors whitespace-nowrap">
+Search
+</button> </div> </div> <!-- Right actions --> <div class="flex items-center gap-2"> <!-- Cart --> <a href="/cart" class="relative flex items-center gap-2 bg-primary-600 hover:bg-primary-500 text-white font-bold px-4 py-2 rounded-xl transition-colors text-sm"> <i class="fa-solid fa-cart-shopping"></i> <span class="hidden sm:block">Cart</span> <span class="cart-count absolute -top-2 -right-2 w-5 h-5 bg-rose-500 text-white text-[10px] font-black rounded-full items-center justify-center shadow-lg" style="display:none">0</span> </a> <!-- Admin link --> <a href="/admin/login" class="hidden lg:flex items-center gap-1.5 text-xs text-gray-400 hover:text-gray-700 transition-colors px-3 py-2 rounded-xl hover:bg-gray-100"> <i class="fa-solid fa-lock text-[10px]"></i>Admin
+</a> <!-- Mobile hamburger --> <button id="menu-toggle" class="md:hidden p-2.5 rounded-xl hover:bg-gray-100 transition-colors" aria-label="Menu"> <div class="w-5 flex flex-col gap-1.5" id="burger-lines"> <span class="block h-0.5 bg-gray-700 rounded transition-all duration-300" id="b1"></span> <span class="block h-0.5 bg-gray-700 rounded transition-all duration-300" id="b2"></span> <span class="block h-0.5 bg-gray-700 rounded transition-all duration-300 w-3/4" id="b3"></span> </div> </button> </div> </div> </div> </div> <!-- Desktop sub-nav --> <div class="hidden md:block bg-white border-b border-gray-100"> <div class="max-w-7xl mx-auto px-4 sm:px-6"> <div class="flex items-center h-10 gap-1"> <a href="/" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-all text-gray-500 hover:text-gray-900 hover:bg-gray-50">Home</a><a href="/shop" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-all bg-primary-50 text-primary-700 font-semibold">Shop</a><a href="/categories" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-all text-gray-500 hover:text-gray-900 hover:bg-gray-50">Categories</a><a href="/about" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-all text-gray-500 hover:text-gray-900 hover:bg-gray-50">About</a><a href="/contact" class="px-4 py-1.5 rounded-lg text-sm font-medium transition-all text-gray-500 hover:text-gray-900 hover:bg-gray-50">Contact</a> <div class="ml-auto flex items-center gap-4 text-xs text-gray-400"> <span class="flex items-center gap-1.5"><i class="fa-solid fa-truck-fast text-primary-500"></i>Free delivery ₹499+</span> <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-primary-500"></i>100% Genuine</span> </div> </div> </div> </div> <!-- Mobile menu --> <div id="mobile-menu" class="md:hidden hidden absolute w-full bg-white border-b border-gray-100 shadow-xl z-50"> <!-- Mobile search --> <div class="px-4 pt-4 pb-3 border-b border-gray-100"> <div class="relative"> <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i> <input id="mobile-search" type="text" placeholder="Search products..." class="w-full bg-gray-100 rounded-2xl px-4 py-2.5 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 focus:bg-white transition-all"> </div> </div> <!-- Mobile links --> <nav class="px-4 py-3 grid grid-cols-2 gap-2"> <a href="/" class="flex items-center gap-2.5 px-4 py-3 rounded-2xl text-sm font-medium transition-colors text-gray-700 hover:bg-gray-50">Home</a><a href="/shop" class="flex items-center gap-2.5 px-4 py-3 rounded-2xl text-sm font-medium transition-colors bg-primary-50 text-primary-700 font-semibold">Shop</a><a href="/categories" class="flex items-center gap-2.5 px-4 py-3 rounded-2xl text-sm font-medium transition-colors text-gray-700 hover:bg-gray-50">Categories</a><a href="/about" class="flex items-center gap-2.5 px-4 py-3 rounded-2xl text-sm font-medium transition-colors text-gray-700 hover:bg-gray-50">About</a><a href="/contact" class="flex items-center gap-2.5 px-4 py-3 rounded-2xl text-sm font-medium transition-colors text-gray-700 hover:bg-gray-50">Contact</a> <a href="/admin/login" class="flex items-center gap-2.5 px-4 py-3 rounded-2xl text-sm font-medium text-gray-400 hover:bg-gray-50 col-span-1"> <i class="fa-solid fa-lock text-[11px]"></i>Admin
+</a> </nav> <!-- Trust badges --> <div class="px-4 pb-4 flex flex-wrap gap-3 text-xs text-gray-400 border-t border-gray-50 pt-3"> <span><i class="fa-solid fa-truck-fast text-primary-500 mr-1"></i>Free delivery ₹499+</span> <span><i class="fa-solid fa-rotate-left text-primary-500 mr-1"></i>Easy returns</span> <span><i class="fa-solid fa-shield-halved text-primary-500 mr-1"></i>Secure shopping</span> </div> </div> </header> <script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const b1 = document.getElementById('b1'), b2 = document.getElementById('b2'), b3 = document.getElementById('b3');
+  let open = false;
+
+  toggle.addEventListener('click', () => {
+    open = !open;
+    menu.classList.toggle('hidden', !open);
+    if (open) {
+      b1.style.cssText = 'transform:translateY(8px) rotate(45deg)';
+      b2.style.opacity = '0';
+      b3.style.cssText = 'transform:translateY(-8px) rotate(-45deg);width:100%';
+    } else {
+      b1.style.cssText = b2.style.cssText = b3.style.cssText = '';
+    }
+  });
+
+  // Scroll shadow
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) header.style.boxShadow = '0 4px 24px rgba(0,0,0,0.08)';
+    else header.style.boxShadow = '';
+  }, { passive: true });
+
+  function doSearch(q) { if (q.trim()) window.location.href = `/shop?q=${encodeURIComponent(q.trim())}`; }
+  const hs = document.getElementById('header-search');
+  const ms = document.getElementById('mobile-search');
+  document.getElementById('search-btn').addEventListener('click', () => doSearch(hs.value));
+  hs.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(hs.value); });
+  if (ms) ms.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(ms.value); });
+</script> <div class="bg-gray-50 min-h-screen"> <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8"> <!-- Page header --> <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6"> <div> <h1 class="text-2xl font-black text-gray-900 tracking-tight">All Products</h1> <p id="product-count" class="text-sm text-gray-400 mt-0.5 font-medium">Loading...</p> </div> <div class="flex items-center gap-3"> <label class="text-sm text-gray-500 font-medium whitespace-nowrap hidden sm:block">Sort:</label> <select id="sort-select" class="bg-white border border-gray-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 font-medium text-gray-700"> <option value="default">Featured First</option> <option value="price-asc">Price: Low → High</option> <option value="price-desc">Price: High → Low</option> <option value="name">Name A–Z</option> <option value="discount">Best Discount</option> </select> </div> </div> <!-- Mobile category pills (horizontal scroll) --> <div class="md:hidden flex gap-2 overflow-x-auto pb-4 mb-6 -mx-4 px-4 scrollbar-hide"> <button class="mob-cat-btn flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-all" data-cat="all"> <span>🛒</span><span>All</span> </button><button class="mob-cat-btn flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-all" data-cat="personal-care"> <span>🧴</span><span>Personal Care</span> </button><button class="mob-cat-btn flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-all" data-cat="snacks"> <span>🍫</span><span>Snacks</span> </button><button class="mob-cat-btn flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-all" data-cat="beverages"> <span>🧃</span><span>Beverages</span> </button><button class="mob-cat-btn flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-all" data-cat="household"> <span>🧹</span><span>Household</span> </button><button class="mob-cat-btn flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-all" data-cat="dairy"> <span>🥛</span><span>Dairy</span> </button><button class="mob-cat-btn flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-all" data-cat="bakery"> <span>🍞</span><span>Bakery</span> </button> </div> <div class="flex gap-6"> <!-- Desktop sidebar --> <aside class="w-60 shrink-0 hidden md:block"> <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 sticky top-28"> <h3 class="font-black text-gray-900 mb-5 text-sm uppercase tracking-widest">Filters</h3> <!-- Category --> <div class="mb-6"> <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Category</h4> <div class="space-y-1"> <label class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors group"> <input type="radio" name="cat" value="all" class="accent-primary-600 w-4 h-4" checked> <span class="text-sm">🛒</span> <span class="text-sm font-medium text-gray-700 group-hover:text-gray-900">All Products</span> </label><label class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors group"> <input type="radio" name="cat" value="personal-care" class="accent-primary-600 w-4 h-4"> <span class="text-sm">🧴</span> <span class="text-sm font-medium text-gray-700 group-hover:text-gray-900">Personal Care</span> </label><label class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors group"> <input type="radio" name="cat" value="snacks" class="accent-primary-600 w-4 h-4"> <span class="text-sm">🍫</span> <span class="text-sm font-medium text-gray-700 group-hover:text-gray-900">Snacks &amp; Chocs</span> </label><label class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors group"> <input type="radio" name="cat" value="beverages" class="accent-primary-600 w-4 h-4"> <span class="text-sm">🧃</span> <span class="text-sm font-medium text-gray-700 group-hover:text-gray-900">Beverages</span> </label><label class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors group"> <input type="radio" name="cat" value="household" class="accent-primary-600 w-4 h-4"> <span class="text-sm">🧹</span> <span class="text-sm font-medium text-gray-700 group-hover:text-gray-900">Household</span> </label><label class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors group"> <input type="radio" name="cat" value="dairy" class="accent-primary-600 w-4 h-4"> <span class="text-sm">🥛</span> <span class="text-sm font-medium text-gray-700 group-hover:text-gray-900">Dairy &amp; Eggs</span> </label><label class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors group"> <input type="radio" name="cat" value="bakery" class="accent-primary-600 w-4 h-4"> <span class="text-sm">🍞</span> <span class="text-sm font-medium text-gray-700 group-hover:text-gray-900">Bakery</span> </label> </div> </div> <!-- Price range --> <div class="mb-6"> <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Price Range</h4> <div class="flex items-center gap-2"> <input id="price-min" type="number" placeholder="₹ Min" min="0" class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 focus:bg-white transition-all"> <span class="text-gray-300 font-bold">–</span> <input id="price-max" type="number" placeholder="₹ Max" min="0" class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 focus:bg-white transition-all"> </div> <button id="apply-price" class="mt-3 w-full bg-gray-50 hover:bg-primary-50 hover:text-primary-600 text-gray-600 font-semibold text-xs py-2 rounded-xl transition-colors border border-gray-200">
+Apply Price Filter
+</button> </div> <!-- In stock --> <label class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-50 cursor-pointer mb-5 transition-colors"> <input type="checkbox" id="in-stock-only" class="accent-primary-600 w-4 h-4 rounded"> <span class="text-sm font-medium text-gray-700">In Stock Only</span> </label> <button id="clear-filters" class="w-full text-xs font-bold text-gray-400 hover:text-gray-700 border border-gray-200 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
+✕ Clear All Filters
+</button> </div> </aside> <!-- Product grid area --> <div class="flex-1 min-w-0"> <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"> <!-- Loading skeletons --> <div class="rounded-3xl overflow-hidden border border-gray-100 bg-white"> <div class="skeleton aspect-square w-full"></div> <div class="p-4 space-y-2"> <div class="skeleton h-3 w-16 rounded-full"></div> <div class="skeleton h-4 rounded-lg"></div> <div class="skeleton h-4 w-3/4 rounded-lg"></div> <div class="flex justify-between items-center mt-3"> <div class="skeleton h-5 w-12 rounded-full"></div> <div class="skeleton w-9 h-9 rounded-xl"></div> </div> </div> </div><div class="rounded-3xl overflow-hidden border border-gray-100 bg-white"> <div class="skeleton aspect-square w-full"></div> <div class="p-4 space-y-2"> <div class="skeleton h-3 w-16 rounded-full"></div> <div class="skeleton h-4 rounded-lg"></div> <div class="skeleton h-4 w-3/4 rounded-lg"></div> <div class="flex justify-between items-center mt-3"> <div class="skeleton h-5 w-12 rounded-full"></div> <div class="skeleton w-9 h-9 rounded-xl"></div> </div> </div> </div><div class="rounded-3xl overflow-hidden border border-gray-100 bg-white"> <div class="skeleton aspect-square w-full"></div> <div class="p-4 space-y-2"> <div class="skeleton h-3 w-16 rounded-full"></div> <div class="skeleton h-4 rounded-lg"></div> <div class="skeleton h-4 w-3/4 rounded-lg"></div> <div class="flex justify-between items-center mt-3"> <div class="skeleton h-5 w-12 rounded-full"></div> <div class="skeleton w-9 h-9 rounded-xl"></div> </div> </div> </div><div class="rounded-3xl overflow-hidden border border-gray-100 bg-white"> <div class="skeleton aspect-square w-full"></div> <div class="p-4 space-y-2"> <div class="skeleton h-3 w-16 rounded-full"></div> <div class="skeleton h-4 rounded-lg"></div> <div class="skeleton h-4 w-3/4 rounded-lg"></div> <div class="flex justify-between items-center mt-3"> <div class="skeleton h-5 w-12 rounded-full"></div> <div class="skeleton w-9 h-9 rounded-xl"></div> </div> </div> </div><div class="rounded-3xl overflow-hidden border border-gray-100 bg-white"> <div class="skeleton aspect-square w-full"></div> <div class="p-4 space-y-2"> <div class="skeleton h-3 w-16 rounded-full"></div> <div class="skeleton h-4 rounded-lg"></div> <div class="skeleton h-4 w-3/4 rounded-lg"></div> <div class="flex justify-between items-center mt-3"> <div class="skeleton h-5 w-12 rounded-full"></div> <div class="skeleton w-9 h-9 rounded-xl"></div> </div> </div> </div><div class="rounded-3xl overflow-hidden border border-gray-100 bg-white"> <div class="skeleton aspect-square w-full"></div> <div class="p-4 space-y-2"> <div class="skeleton h-3 w-16 rounded-full"></div> <div class="skeleton h-4 rounded-lg"></div> <div class="skeleton h-4 w-3/4 rounded-lg"></div> <div class="flex justify-between items-center mt-3"> <div class="skeleton h-5 w-12 rounded-full"></div> <div class="skeleton w-9 h-9 rounded-xl"></div> </div> </div> </div><div class="rounded-3xl overflow-hidden border border-gray-100 bg-white"> <div class="skeleton aspect-square w-full"></div> <div class="p-4 space-y-2"> <div class="skeleton h-3 w-16 rounded-full"></div> <div class="skeleton h-4 rounded-lg"></div> <div class="skeleton h-4 w-3/4 rounded-lg"></div> <div class="flex justify-between items-center mt-3"> <div class="skeleton h-5 w-12 rounded-full"></div> <div class="skeleton w-9 h-9 rounded-xl"></div> </div> </div> </div><div class="rounded-3xl overflow-hidden border border-gray-100 bg-white"> <div class="skeleton aspect-square w-full"></div> <div class="p-4 space-y-2"> <div class="skeleton h-3 w-16 rounded-full"></div> <div class="skeleton h-4 rounded-lg"></div> <div class="skeleton h-4 w-3/4 rounded-lg"></div> <div class="flex justify-between items-center mt-3"> <div class="skeleton h-5 w-12 rounded-full"></div> <div class="skeleton w-9 h-9 rounded-xl"></div> </div> </div> </div> </div> <div id="no-results" class="hidden text-center py-20"> <div class="text-6xl mb-5">🔍</div> <h3 class="text-xl font-black text-gray-900 mb-2">Nothing found</h3> <p class="text-gray-500 mb-7">Try different search terms or clear the filters</p> <button onclick="document.getElementById('clear-filters').click()" class="btn-primary">Clear Filters</button> </div> </div> </div> </div> </div> <footer class="bg-[#0b1120] text-gray-400 mt-16"> <!-- Main footer --> <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14"> <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10"> <!-- Brand --> <div class="lg:col-span-1"> <div class="flex items-center gap-3 mb-5"> <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-lg shadow-primary-900/40"> <i class="fa-solid fa-leaf text-white text-base"></i> </div> <div> <div class="font-black text-lg text-white tracking-tight">AAYI Mart</div> <div class="text-[10px] font-bold text-primary-500 tracking-widest uppercase">Supermarket</div> </div> </div> <p class="text-sm text-gray-500 leading-relaxed mb-6">Your trusted neighbourhood supermarket for fresh produce, daily essentials, and everything in between — delivered fast.</p> <div class="flex gap-2.5"> <a href="#" class="w-9 h-9 bg-white/5 hover:bg-primary-600 border border-white/10 hover:border-primary-500 rounded-xl flex items-center justify-center transition-all duration-200"> <i class="fa-brands fa-facebook-f text-xs text-gray-400 hover:text-white"></i> </a><a href="#" class="w-9 h-9 bg-white/5 hover:bg-primary-600 border border-white/10 hover:border-primary-500 rounded-xl flex items-center justify-center transition-all duration-200"> <i class="fa-brands fa-instagram text-xs text-gray-400 hover:text-white"></i> </a><a href="#" class="w-9 h-9 bg-white/5 hover:bg-primary-600 border border-white/10 hover:border-primary-500 rounded-xl flex items-center justify-center transition-all duration-200"> <i class="fa-brands fa-x-twitter text-xs text-gray-400 hover:text-white"></i> </a><a href="#" class="w-9 h-9 bg-white/5 hover:bg-primary-600 border border-white/10 hover:border-primary-500 rounded-xl flex items-center justify-center transition-all duration-200"> <i class="fa-brands fa-youtube text-xs text-gray-400 hover:text-white"></i> </a> </div> </div> <!-- Quick Links --> <div> <h5 class="text-xs font-black text-white uppercase tracking-widest mb-5">Quick Links</h5> <ul class="space-y-3 text-sm"> <li><a href="/" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Home</a></li><li><a href="/shop" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Shop All</a></li><li><a href="/categories" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Categories</a></li><li><a href="/about" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">About Us</a></li><li><a href="/contact" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Contact</a></li><li><a href="/cart" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">My Cart</a></li> </ul> </div> <!-- Categories --> <div> <h5 class="text-xs font-black text-white uppercase tracking-widest mb-5">Categories</h5> <ul class="space-y-3 text-sm"> <li><a href="/shop?cat=personal-care" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Personal Care</a></li><li><a href="/shop?cat=snacks" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Snacks &amp; Chocolates</a></li><li><a href="/shop?cat=beverages" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Beverages</a></li><li><a href="/shop?cat=household" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Household Cleaning</a></li><li><a href="/shop?cat=dairy" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Dairy &amp; Eggs</a></li><li><a href="/shop?cat=bakery" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Bakery &amp; Bread</a></li> </ul> </div> <!-- Contact --> <div> <h5 class="text-xs font-black text-white uppercase tracking-widest mb-5">Contact Us</h5> <ul class="space-y-4 text-sm"> <li class="flex gap-3 items-start"> <div class="w-7 h-7 bg-white/5 rounded-lg flex items-center justify-center shrink-0 mt-0.5"> <i class="fa-solid fa-location-dot text-primary-500 text-xs"></i> </div> <span class="text-gray-500 leading-relaxed">42, Market Road, Koramangala,<br>Bengaluru – 560034</span> </li> <li class="flex gap-3 items-center"> <div class="w-7 h-7 bg-white/5 rounded-lg flex items-center justify-center shrink-0"> <i class="fa-solid fa-phone text-primary-500 text-xs"></i> </div> <a href="tel:+918012345678" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">+91 80123 45678</a> </li> <li class="flex gap-3 items-center"> <div class="w-7 h-7 bg-white/5 rounded-lg flex items-center justify-center shrink-0"> <i class="fa-solid fa-envelope text-primary-500 text-xs"></i> </div> <a href="mailto:hello@aayimart.in" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">hello@aayimart.in</a> </li> <li class="flex gap-3 items-center"> <div class="w-7 h-7 bg-white/5 rounded-lg flex items-center justify-center shrink-0"> <i class="fa-solid fa-clock text-primary-500 text-xs"></i> </div> <span class="text-gray-500">Mon–Sun: 7 AM – 10 PM</span> </li> </ul> </div> </div> </div> <!-- Trust strip --> <div class="border-t border-white/5"> <div class="max-w-7xl mx-auto px-4 py-5"> <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-gray-600"> <span class="flex items-center gap-2"><i class="fa-solid fa-truck-fast text-primary-500"></i>Free delivery ₹499+</span> <span class="flex items-center gap-2"><i class="fa-solid fa-rotate-left text-primary-500"></i>Easy 7-day returns</span> <span class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-primary-500"></i>100% Secure payments</span> <span class="flex items-center gap-2"><i class="fa-solid fa-leaf text-primary-500"></i>FSSAI Certified</span> <span class="flex items-center gap-2"><i class="fa-solid fa-headset text-primary-500"></i>24/7 Support</span> </div> </div> </div> <!-- Bottom bar --> <div class="border-t border-white/5"> <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-600"> <p>© 2025 AAYI Mart Supermarket. All rights reserved.</p> <div class="flex gap-5"> <a href="#" class="hover:text-gray-400 transition-colors">Privacy Policy</a> <a href="#" class="hover:text-gray-400 transition-colors">Terms of Service</a> <a href="/admin/login" class="hover:text-gray-400 transition-colors flex items-center gap-1"><i class="fa-solid fa-lock text-[10px]"></i>Admin</a> </div> </div> </div> </footer>  <!-- Toast --> <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-gray-950 text-white px-5 py-3.5 rounded-2xl text-sm font-medium shadow-2xl z-[9999] opacity-0 pointer-events-none min-w-[220px] border border-white/10"> <div id="toast-icon" class="w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center shrink-0"> <i class="fa-solid fa-check text-[10px]"></i> </div> <span id="toast-msg">Added to cart!</span> </div> <script>
+    // ── Toast ───────────────────────────────────────────────
+    window.showToast = function(msg, type) {
+      const t = document.getElementById('toast');
+      const ic = document.getElementById('toast-icon');
+      const m = document.getElementById('toast-msg');
+      m.textContent = msg;
+      if (type === 'error') {
+        ic.className = 'w-6 h-6 bg-rose-500 rounded-full flex items-center justify-center shrink-0';
+        ic.innerHTML = '<i class="fa-solid fa-xmark text-[10px]"></i>';
+      } else {
+        ic.className = 'w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center shrink-0';
+        ic.innerHTML = '<i class="fa-solid fa-check text-[10px]"></i>';
+      }
+      t.style.opacity = '1'; t.style.pointerEvents = 'auto';
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => { t.style.opacity = '0'; t.style.pointerEvents = 'none'; }, 2600);
+    };
+
+    // ── Cart ─────────────────────────────────────────────────
+    window.getCart = () => JSON.parse(localStorage.getItem('fm_cart') || '[]');
+    window.saveCart = (cart) => { localStorage.setItem('fm_cart', JSON.stringify(cart)); window.updateCartBadge(); };
+    window.addToCart = function(product) {
+      const cart = window.getCart();
+      const idx = cart.findIndex(i => i.id === product.id);
+      if (idx > -1) cart[idx].qty += 1; else cart.push({ ...product, qty: 1 });
+      window.saveCart(cart);
+      window.showToast(product.name.split(' ').slice(0,3).join(' ') + ' added!');
+    };
+    window.updateCartBadge = function() {
+      const count = window.getCart().reduce((s, i) => s + i.qty, 0);
+      document.querySelectorAll('.cart-count').forEach(el => {
+        el.textContent = count;
+        el.style.display = count > 0 ? 'flex' : 'none';
+      });
+    };
+
+    // ── Products ─────────────────────────────────────────────
+    window.getProducts = () => JSON.parse(localStorage.getItem('fm_products') || '[]');
+    window.saveProducts = (p) => localStorage.setItem('fm_products', JSON.stringify(p));
+
+    // ── Seed (v3 — with real images) ────────────────────────
+    window.seedProducts = function() {
+      if (localStorage.getItem('fm_seed_v') === '3') return;
+      const u = 'https://images.unsplash.com/photo-';
+      const q = '?w=400&h=400&fit=crop&q=80&auto=format';
+      const products = [
+        { id:'p1',  name:'Dove Beauty Bar Soap',              category:'personal-care', price:45,  originalPrice:55,  brand:'Dove',          unit:'100g',   stock:150, featured:true,  description:'Moisturizing beauty bar with ¼ cream for soft, smooth skin.',    image: u+'1584305574647-0cc949a2bb9f'+q },
+        { id:'p2',  name:'Head & Shoulders Classic Shampoo',  category:'personal-care', price:225, originalPrice:280, brand:'Head & Shoulders', unit:'340ml', stock:80,  featured:true,  description:'Anti-dandruff shampoo with pyrithione zinc formula.',            image: u+'1556228720-195a672e8a03'+q },
+        { id:'p3',  name:'Pantene Pro-V Smooth Shampoo',      category:'personal-care', price:199, originalPrice:240, brand:'Pantene',       unit:'340ml',  stock:90,  featured:false, description:'10x stronger hair with Pro-V nutrient blend.',                   image: u+'1571781926291-c477ebfd024b'+q },
+        { id:'p4',  name:'Colgate Strong Teeth Toothpaste',   category:'personal-care', price:75,  originalPrice:90,  brand:'Colgate',       unit:'200g',   stock:200, featured:false, description:'Active calcium formula for strong, cavity-free teeth.',          image: u+'1559056199-641a0ac8b55e'+q },
+        { id:'p5',  name:'KitKat 4-Finger Chocolate Bar',     category:'snacks',        price:30,  originalPrice:35,  brand:'Nestlé',        unit:'41.5g',  stock:300, featured:true,  description:'Crispy wafer fingers covered with smooth milk chocolate.',        image: u+'1481391319762-47dff72954d9'+q },
+        { id:'p6',  name:'Cadbury Dairy Milk Chocolate',      category:'snacks',        price:40,  originalPrice:45,  brand:'Cadbury',       unit:'50g',    stock:250, featured:true,  description:'The iconic milk chocolate bar with unmistakable creamy taste.',   image: u+'1549007994-cb92caebd54b'+q },
+        { id:'p7',  name:"Lay's Classic Salted Chips",        category:'snacks',        price:20,  originalPrice:20,  brand:"Lay's",         unit:'52g',    stock:180, featured:false, description:'Perfectly crispy potato chips with classic salted flavor.',       image: u+'1566478989037-eec170784d0b'+q },
+        { id:'p8',  name:'Oreo Original Chocolate Cookies',   category:'snacks',        price:35,  originalPrice:40,  brand:'Oreo',          unit:'120g',   stock:220, featured:false, description:'Classic chocolate sandwich cookies with vanilla cream filling.',    image: u+'1558961363-fa8fdf82db35'+q },
+        { id:'p9',  name:'Parle-G Glucose Biscuits',          category:'snacks',        price:10,  originalPrice:10,  brand:'Parle',         unit:'100g',   stock:400, featured:false, description:"India's favourite glucose biscuits — perfect with chai.",         image: u+'1499636136210-6f4ee915583e'+q },
+        { id:'p10', name:'Maggi 2-Minute Masala Noodles',     category:'snacks',        price:14,  originalPrice:14,  brand:'Nestlé',        unit:'70g',    stock:400, featured:true,  description:"India's favourite instant noodles. Ready in 2 minutes!",         image: u+'1569718212165-3a8278d5f624'+q },
+        { id:'p11', name:'Tropicana 100% Orange Juice',       category:'beverages',     price:99,  originalPrice:120, brand:'Tropicana',     unit:'1L',     stock:100, featured:true,  description:'100% pure orange juice. No added sugar or preservatives.',        image: u+'1621506289937-a8e4df240d0b'+q },
+        { id:'p12', name:'Coca-Cola Classic',                 category:'beverages',     price:40,  originalPrice:40,  brand:'Coca-Cola',     unit:'600ml',  stock:300, featured:false, description:'The original refreshing cola taste you love.',                    image: u+'1554866585-cd94860890b7'+q },
+        { id:'p13', name:'Real Mango Fruit Juice',            category:'beverages',     price:85,  originalPrice:100, brand:'Real',          unit:'1L',     stock:120, featured:false, description:'Made with real mango pulp and natural fruit flavor.',              image: u+'1546173159-315724a31696'+q },
+        { id:'p14', name:'Bisleri Mineral Water',             category:'beverages',     price:20,  originalPrice:20,  brand:'Bisleri',       unit:'1L',     stock:500, featured:false, description:'Pure and safe mineral water with essential minerals.',             image: u+'1548839140-29a749e1cf4d'+q },
+        { id:'p15', name:'Ariel Matic Detergent Powder',      category:'household',     price:185, originalPrice:220, brand:'Ariel',         unit:'1kg',    stock:90,  featured:false, description:'Advanced stain removal for top-load washing machines.',            image: u+'1585421514284-efb74c2b69ba'+q },
+        { id:'p16', name:'Vim Dishwash Liquid',               category:'household',     price:65,  originalPrice:75,  brand:'Vim',           unit:'500ml',  stock:140, featured:false, description:'Powerful dishwash liquid that cuts grease in one wash.',           image: u+'1585421514284-efb74c2b69ba'+q },
+        { id:'p17', name:'Harpic Power Plus Toilet Cleaner',  category:'household',     price:75,  originalPrice:90,  brand:'Harpic',        unit:'500ml',  stock:100, featured:false, description:'10x stronger formula — removes 99.9% germs and limescale.',       image: u+'1585421514284-efb74c2b69ba'+q },
+        { id:'p18', name:'Amul Taaza Toned Milk',             category:'dairy',         price:28,  originalPrice:28,  brand:'Amul',          unit:'500ml',  stock:500, featured:false, description:'Fresh toned milk with 3.5% fat — your daily nutrition.',           image: u+'1563636619-e9143da7973b'+q },
+        { id:'p19', name:'Britannia Cheese Slices',           category:'dairy',         price:75,  originalPrice:85,  brand:'Britannia',     unit:'200g',   stock:80,  featured:true,  description:'Ready-to-use processed cheese slices for burgers & sandwiches.',  image: u+'1619566636858-adf3ef46400b'+q },
+        { id:'p20', name:'Amul Butter Pasteurized',           category:'dairy',         price:56,  originalPrice:60,  brand:'Amul',          unit:'100g',   stock:120, featured:false, description:'Pure pasteurized butter made from fresh cream.',                  image: u+'1589985270826-4b7bb135bc9d'+q },
+        { id:'p21', name:'Amul Dahi Curd',                    category:'dairy',         price:35,  originalPrice:40,  brand:'Amul',          unit:'400g',   stock:200, featured:false, description:'Fresh and thick curd. Rich in probiotics and calcium.',            image: u+'1488477181946-6428a0291777'+q },
+        { id:'p22', name:'Britannia Multigrain Bread',        category:'bakery',        price:45,  originalPrice:50,  brand:'Britannia',     unit:'400g',   stock:80,  featured:false, description:'Soft multigrain bread with oats, wheat and flaxseeds.',           image: u+'1509440159596-0249088772ff'+q },
+        { id:'p23', name:'Lifebuoy Total 10 Soap',            category:'personal-care', price:38,  originalPrice:45,  brand:'Lifebuoy',      unit:'125g',   stock:180, featured:false, description:'Activ Silver formula — keeps 10 problems away for 12 hours.',     image: u+'1607006344380-b6775a0824a7'+q },
+        { id:'p24', name:"Lay's Magic Masala Chips",          category:'snacks',        price:20,  originalPrice:20,  brand:"Lay's",         unit:'52g',    stock:250, featured:false, description:'Bold masala flavor on crispy potato chips. Utterly Butterly!',    image: u+'1621939514649-280e2ee25f60'+q },
+      ];
+      window.saveProducts(products);
+      localStorage.setItem('fm_seed_v', '3');
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      window.seedProducts();
+      window.updateCartBadge();
+    });
+  </script> </body> </html> <script>
+  let allProducts = [];
+  let filters = { cat:'all', q:'', minPrice:null, maxPrice:null, inStock:false };
+  let sortBy = 'default';
+
+  function getDiscount(p) { return p.originalPrice > p.price ? Math.round((1-p.price/p.originalPrice)*100) : 0; }
+
+  function renderCard(p) {
+    const d = getDiscount(p);
+    return `
+      <div class="product-card flex flex-col">
+        <div class="relative overflow-hidden bg-gradient-to-br from-slate-50 to-gray-100" style="aspect-ratio:1/1">
+          <img src="${p.image}" alt="${p.name}" class="product-img w-full h-full object-contain p-4" loading="lazy"
+            onerror="this.onerror=null;this.src='https://placehold.co/400x400/16a34a/ffffff?text=${encodeURIComponent(p.name.slice(0,12))}'" />
+          ${d > 0 ? `<div class="badge-discount"><i class="fa-solid fa-bolt text-[8px]"></i>${d}% OFF</div>` : ''}
+          ${p.stock > 0 && p.stock < 10 ? `<div class="absolute top-2.5 right-2.5 bg-amber-400 text-white text-[10px] font-black px-2 py-0.5 rounded-full">Only ${p.stock} left!</div>` : ''}
+          ${p.stock === 0 ? `<div class="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-20"><span class="bg-gray-900 text-white text-xs font-bold px-4 py-1.5 rounded-full">Out of Stock</span></div>` : ''}
+          ${p.stock > 0 ? `
+          <div class="quick-add-overlay absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-3">
+            <button onclick='window.addToCart(${JSON.stringify(p)})' class="w-full bg-white text-gray-900 font-bold text-xs py-2.5 rounded-2xl hover:bg-primary-50 active:scale-95 transition-all">
+              <i class="fa-solid fa-cart-plus mr-1.5 text-primary-600"></i>Quick Add
+            </button>
+          </div>` : ''}
+        </div>
+        <div class="p-4 flex flex-col flex-1">
+          <p class="text-[10px] font-black text-primary-600 uppercase tracking-widest mb-1">${p.brand}</p>
+          <h3 class="font-semibold text-gray-900 text-sm leading-snug line-clamp-2 flex-1 mb-2 min-h-[2.5rem]">${p.name}</h3>
+          <span class="text-[10px] text-gray-400 font-medium bg-gray-100 px-2 py-0.5 rounded-md w-fit mb-3">${p.unit}</span>
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-baseline gap-1.5">
+              <span class="text-base font-black text-gray-900">₹${p.price}</span>
+              ${d > 0 ? `<span class="text-xs text-gray-400 line-through">₹${p.originalPrice}</span>` : ''}
+            </div>
+            <button ${p.stock === 0 ? 'disabled' : ''} onclick='window.addToCart(${JSON.stringify(p)})'
+              class="w-9 h-9 ${p.stock === 0 ? 'bg-gray-200 cursor-not-allowed' : 'bg-primary-600 hover:bg-primary-500 active:scale-90 shadow-md shadow-primary-600/25'} text-white rounded-xl flex items-center justify-center transition-all shrink-0">
+              <i class="fa-solid fa-plus text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function render() {
+    let result = [...allProducts];
+    if (filters.cat !== 'all') result = result.filter(p => p.category === filters.cat);
+    if (filters.q) { const q = filters.q.toLowerCase(); result = result.filter(p => p.name.toLowerCase().includes(q) || p.brand.toLowerCase().includes(q)); }
+    if (filters.minPrice !== null) result = result.filter(p => p.price >= filters.minPrice);
+    if (filters.maxPrice !== null) result = result.filter(p => p.price <= filters.maxPrice);
+    if (filters.inStock) result = result.filter(p => p.stock > 0);
+    if (sortBy === 'price-asc') result.sort((a,b) => a.price-b.price);
+    else if (sortBy === 'price-desc') result.sort((a,b) => b.price-a.price);
+    else if (sortBy === 'name') result.sort((a,b) => a.name.localeCompare(b.name));
+    else if (sortBy === 'discount') result.sort((a,b) => getDiscount(b)-getDiscount(a));
+    else result.sort((a,b) => (b.featured?1:0)-(a.featured?1:0));
+
+    const grid = document.getElementById('products-grid');
+    const noRes = document.getElementById('no-results');
+    document.getElementById('product-count').textContent = `${result.length} product${result.length !== 1 ? 's' : ''} found`;
+    if (!result.length) { grid.innerHTML = ''; noRes.classList.remove('hidden'); }
+    else { noRes.classList.add('hidden'); grid.innerHTML = result.map(renderCard).join(''); }
+  }
+
+  function updateMobBtns(cat) {
+    document.querySelectorAll('.mob-cat-btn').forEach(b => {
+      const active = b.dataset.cat === cat;
+      b.className = `mob-cat-btn flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-all ${active ? 'bg-primary-600 text-white shadow-md shadow-primary-600/30' : 'bg-white text-gray-600 border border-gray-200'}`;
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    allProducts = window.getProducts();
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('cat')) { filters.cat = params.get('cat'); const r = document.querySelector(`input[name="cat"][value="${filters.cat}"]`); if (r) r.checked = true; }
+    if (params.get('q')) filters.q = params.get('q');
+    updateMobBtns(filters.cat);
+    render();
+
+    document.querySelectorAll('input[name="cat"]').forEach(r => r.addEventListener('change', () => { filters.cat = r.value; updateMobBtns(r.value); render(); }));
+    document.querySelectorAll('.mob-cat-btn').forEach(b => b.addEventListener('click', () => {
+      filters.cat = b.dataset.cat;
+      updateMobBtns(b.dataset.cat);
+      const radio = document.querySelector(`input[name="cat"][value="${filters.cat}"]`);
+      if (radio) radio.checked = true;
+      render();
+    }));
+    document.getElementById('sort-select').addEventListener('change', function() { sortBy = this.value; render(); });
+    document.getElementById('apply-price').addEventListener('click', () => {
+      const mn = parseFloat(document.getElementById('price-min').value);
+      const mx = parseFloat(document.getElementById('price-max').value);
+      filters.minPrice = isNaN(mn) ? null : mn;
+      filters.maxPrice = isNaN(mx) ? null : mx;
+      render();
+    });
+    document.getElementById('in-stock-only').addEventListener('change', function() { filters.inStock = this.checked; render(); });
+    document.getElementById('clear-filters').addEventListener('click', () => {
+      filters = { cat:'all', q:'', minPrice:null, maxPrice:null, inStock:false };
+      document.querySelector('input[name="cat"][value="all"]').checked = true;
+      document.getElementById('price-min').value = '';
+      document.getElementById('price-max').value = '';
+      document.getElementById('in-stock-only').checked = false;
+      document.getElementById('sort-select').value = 'default';
+      sortBy = 'default';
+      updateMobBtns('all');
+      render();
+    });
+  });
+</script>

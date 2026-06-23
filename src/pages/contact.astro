@@ -1,0 +1,269 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="Contact Us">
+  <Header activePage="contact" />
+
+  <!-- Hero -->
+  <section class="bg-[#0b1120] py-14 relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-96 h-96 bg-primary-600 rounded-full opacity-10 blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-80 h-80 bg-emerald-500 rounded-full opacity-10 blur-3xl translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
+    <div class="max-w-3xl mx-auto px-4 text-center relative z-10">
+      <div class="inline-flex items-center gap-2 bg-primary-500/20 text-primary-400 text-xs font-bold px-4 py-2 rounded-full mb-4 border border-primary-500/20">
+        <i class="fa-solid fa-headset text-xs"></i>We're here to help
+      </div>
+      <h1 class="text-4xl md:text-5xl font-black text-white mb-3 tracking-tight">
+        Get In <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-emerald-300">Touch</span>
+      </h1>
+      <p class="text-gray-400 text-base max-w-lg mx-auto">Have a question, feedback, or bulk order request? Our team responds within 24 hours.</p>
+    </div>
+  </section>
+
+  <!-- Quick contact strip -->
+  <div class="bg-white border-b border-gray-100 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-0">
+      <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100">
+        {[
+          { icon:'fa-phone', label:'Call Us', value:'+91 80123 45678', href:'tel:+918012345678', color:'text-primary-600' },
+          { icon:'fa-envelope', label:'Email', value:'hello@aayimart.in', href:'mailto:hello@aayimart.in', color:'text-blue-600' },
+          { icon:'fa-clock', label:'Hours', value:'7 AM – 10 PM Daily', href:null, color:'text-amber-600' },
+          { icon:'fa-location-dot', label:'Main Store', value:'Koramangala, Bengaluru', href:'#locations', color:'text-rose-600' },
+        ].map(c => (
+          <div class="flex items-center gap-3 px-5 py-4 hover:bg-gray-50 transition-colors">
+            <div class={`w-9 h-9 rounded-xl bg-gray-50 flex items-center justify-center shrink-0 ${c.color}`}>
+              <i class={`fa-solid ${c.icon} text-sm`}></i>
+            </div>
+            <div class="min-w-0">
+              <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest">{c.label}</div>
+              {c.href
+                ? <a href={c.href} class={`text-sm font-bold ${c.color} hover:underline truncate block`}>{c.value}</a>
+                : <div class="text-sm font-bold text-gray-700 truncate">{c.value}</div>
+              }
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="max-w-7xl mx-auto px-4 py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+
+      <!-- Contact Form (wider) -->
+      <div class="lg:col-span-3 bg-white rounded-3xl border border-gray-100 shadow-sm p-8">
+        <div class="flex items-center gap-3 mb-7">
+          <div class="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center">
+            <i class="fa-solid fa-paper-plane text-primary-600 text-sm"></i>
+          </div>
+          <div>
+            <h2 class="font-black text-gray-900 text-xl">Send Us a Message</h2>
+            <p class="text-xs text-gray-400 mt-0.5">We'll get back to you within 24 hours</p>
+          </div>
+        </div>
+
+        <form id="contact-form" class="space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-2">Your Name <span class="text-red-500">*</span></label>
+              <div class="relative">
+                <i class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 text-sm pointer-events-none"></i>
+                <input type="text" name="name" placeholder="Rajan Kumar"
+                  class="w-full bg-gray-50 border-2 border-gray-100 focus:border-primary-400 focus:bg-white rounded-2xl pl-10 pr-4 py-3 text-sm focus:outline-none transition-all font-medium" required />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-2">Email Address <span class="text-red-500">*</span></label>
+              <div class="relative">
+                <i class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 text-sm pointer-events-none"></i>
+                <input type="email" name="email" placeholder="you@example.com"
+                  class="w-full bg-gray-50 border-2 border-gray-100 focus:border-primary-400 focus:bg-white rounded-2xl pl-10 pr-4 py-3 text-sm focus:outline-none transition-all font-medium" required />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-2">Phone Number</label>
+              <div class="relative">
+                <i class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 text-sm pointer-events-none"></i>
+                <input type="tel" name="phone" placeholder="+91 98765 43210"
+                  class="w-full bg-gray-50 border-2 border-gray-100 focus:border-primary-400 focus:bg-white rounded-2xl pl-10 pr-4 py-3 text-sm focus:outline-none transition-all font-medium" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-2">Subject <span class="text-red-500">*</span></label>
+              <div class="relative">
+                <i class="fa-solid fa-tag absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 text-sm pointer-events-none"></i>
+                <select name="subject"
+                  class="w-full bg-gray-50 border-2 border-gray-100 focus:border-primary-400 focus:bg-white rounded-2xl pl-10 pr-4 py-3 text-sm focus:outline-none transition-all font-medium appearance-none cursor-pointer" required>
+                  <option value="">Select a subject</option>
+                  <option value="order">Order Enquiry</option>
+                  <option value="product">Product Query</option>
+                  <option value="delivery">Delivery Issue</option>
+                  <option value="return">Return / Refund</option>
+                  <option value="feedback">Feedback</option>
+                  <option value="bulk">Bulk / Business Order</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-2">Your Message <span class="text-red-500">*</span></label>
+            <textarea name="message" rows="5"
+              class="w-full bg-gray-50 border-2 border-gray-100 focus:border-primary-400 focus:bg-white rounded-2xl px-4 py-3 text-sm focus:outline-none transition-all font-medium resize-none"
+              placeholder="Tell us how we can help you..." required></textarea>
+          </div>
+          <div class="flex items-start gap-3">
+            <input type="checkbox" id="consent" required class="mt-1 accent-primary-600 w-4 h-4 cursor-pointer" />
+            <label for="consent" class="text-sm text-gray-500 cursor-pointer leading-relaxed">
+              I agree to AAYI Mart's <a href="#" class="text-primary-600 font-semibold hover:underline">privacy policy</a> and consent to being contacted regarding my enquiry.
+            </label>
+          </div>
+          <button type="submit" id="submit-btn"
+            class="w-full flex items-center justify-center gap-2.5 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white font-black py-4 rounded-2xl transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary-600/30 text-base active:scale-[0.98]">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span id="submit-text">Send Message</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Right sidebar -->
+      <div class="lg:col-span-2 space-y-5">
+
+        <!-- Store hours -->
+        <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-9 h-9 bg-amber-50 rounded-xl flex items-center justify-center">
+              <i class="fa-solid fa-clock text-amber-500 text-sm"></i>
+            </div>
+            <h3 class="font-black text-gray-900">Store Hours</h3>
+          </div>
+          <div class="space-y-3">
+            {[
+              { day: "Monday – Friday", hours: "7:00 AM – 10:00 PM", dot: "bg-primary-500" },
+              { day: "Saturday", hours: "7:00 AM – 11:00 PM", dot: "bg-primary-500" },
+              { day: "Sunday", hours: "8:00 AM – 10:00 PM", dot: "bg-amber-500" },
+            ].map(h => (
+              <div class="flex items-center justify-between py-2.5 border-b border-gray-50 last:border-0">
+                <div class="flex items-center gap-2.5">
+                  <div class={`w-2 h-2 rounded-full ${h.dot} shrink-0`}></div>
+                  <span class="text-sm text-gray-600 font-medium">{h.day}</span>
+                </div>
+                <span class="text-sm font-bold text-gray-900">{h.hours}</span>
+              </div>
+            ))}
+          </div>
+          <div class="mt-4 flex items-center gap-2 bg-primary-50 rounded-xl px-4 py-3">
+            <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse shrink-0"></div>
+            <span class="text-xs font-bold text-primary-700">We're open now!</span>
+          </div>
+        </div>
+
+        <!-- Contact details -->
+        <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 space-y-4">
+          <h3 class="font-black text-gray-900 mb-4">Direct Contact</h3>
+          {[
+            { icon:'fa-phone', label:'Phone', value:'+91 80123 45678', href:'tel:+918012345678', bg:'bg-primary-50', ic:'text-primary-600' },
+            { icon:'fa-envelope', label:'Email', value:'hello@aayimart.in', href:'mailto:hello@aayimart.in', bg:'bg-blue-50', ic:'text-blue-600' },
+            { icon:'fa-location-dot', label:'Address', value:'42, Market Road, Koramangala, Bengaluru – 560034', href:null, bg:'bg-rose-50', ic:'text-rose-500' },
+          ].map(c => (
+            <div class="flex items-start gap-4">
+              <div class={`w-10 h-10 ${c.bg} rounded-xl flex items-center justify-center shrink-0`}>
+                <i class={`fa-solid ${c.icon} ${c.ic} text-sm`}></i>
+              </div>
+              <div>
+                <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-0.5">{c.label}</div>
+                {c.href
+                  ? <a href={c.href} class={`text-sm font-bold ${c.ic} hover:underline`}>{c.value}</a>
+                  : <span class="text-sm text-gray-700 font-medium leading-relaxed">{c.value}</span>
+                }
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- FAQ quick links -->
+        <div class="bg-gradient-to-br from-primary-50 to-emerald-50 rounded-3xl border border-primary-100 p-6">
+          <h3 class="font-black text-primary-900 mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-circle-question text-primary-500"></i>Common Questions
+          </h3>
+          <div class="space-y-2.5">
+            {[
+              "How do I track my order?",
+              "What is your return policy?",
+              "Do you offer bulk discounts?",
+              "Which areas do you deliver to?",
+            ].map(q => (
+              <button class="w-full text-left flex items-center justify-between p-3 bg-white hover:bg-primary-50 rounded-xl text-sm font-medium text-gray-700 transition-all border border-white hover:border-primary-100 group">
+                <span>{q}</span>
+                <i class="fa-solid fa-chevron-right text-primary-400 text-xs group-hover:translate-x-0.5 transition-transform"></i>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Store Locations -->
+    <div class="mt-12" id="locations">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <div class="text-xs font-black text-primary-600 uppercase tracking-widest mb-1">Find Us</div>
+          <h2 class="text-2xl font-black text-gray-900">Our Store Locations</h2>
+        </div>
+        <span class="text-sm text-gray-400 font-medium">5 stores across Bengaluru</span>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        {[
+          { name:"Koramangala", address:"42, Market Road, 5th Block", timing:"7 AM – 10 PM", tag:"Main Store", tagColor:"bg-primary-100 text-primary-700" },
+          { name:"Indiranagar",  address:"78, 12th Main Road",          timing:"7 AM – 10 PM", tag:null, tagColor:"" },
+          { name:"JP Nagar",     address:"15, 7th Phase",               timing:"7 AM – 10 PM", tag:null, tagColor:"" },
+          { name:"Whitefield",   address:"22, ITPL Main Road",          timing:"8 AM – 10 PM", tag:null, tagColor:"" },
+          { name:"Malleshwaram", address:"5, Sampige Road",             timing:"7 AM – 9 PM",  tag:null, tagColor:"" },
+        ].map(store => (
+          <div class="group bg-white rounded-3xl border border-gray-100 shadow-sm p-5 hover:border-primary-200 hover:shadow-md transition-all cursor-pointer">
+            <div class="flex items-start justify-between mb-3">
+              <div class="w-10 h-10 bg-primary-50 group-hover:bg-primary-100 rounded-xl flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-store text-primary-600 text-sm"></i>
+              </div>
+              {store.tag && <span class={`text-[10px] font-black px-2 py-1 rounded-full ${store.tagColor}`}>{store.tag}</span>}
+            </div>
+            <h4 class="font-black text-gray-900 mb-1">{store.name}</h4>
+            <p class="text-xs text-gray-500 mb-3 leading-relaxed">{store.address}, Bengaluru</p>
+            <div class="flex items-center gap-1.5 text-xs font-bold text-primary-600">
+              <i class="fa-solid fa-clock text-[10px]"></i>
+              {store.timing}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
+
+<script is:inline>
+  document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const btn = document.getElementById("submit-btn");
+    const txt = document.getElementById("submit-text");
+    btn.disabled = true;
+    txt.textContent = "Sending...";
+    setTimeout(() => {
+      btn.disabled = false;
+      txt.textContent = "Send Message";
+      this.reset();
+      Swal.fire({
+        icon: "success",
+        title: "Message Sent!",
+        html: "<p class='text-gray-500'>Thank you for reaching out. Our team will get back to you within <strong class='text-gray-800'>24 hours</strong>.</p>",
+        confirmButtonColor: "#16a34a",
+        confirmButtonText: "Great, thanks!",
+        customClass: { popup: "rounded-3xl font-sans", confirmButton: "rounded-xl font-bold px-6 py-2.5" },
+      });
+    }, 1000);
+  });
+</script>

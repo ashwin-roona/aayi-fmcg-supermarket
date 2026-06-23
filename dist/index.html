@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AAYI Mart — Fresh groceries delivered fast.">
+  <title>Home — Fresh Groceries Delivered Fast — AAYI Mart</title>
+  <link rel="icon" type="image/x-icon" href="/aayi-favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="/_astro/about.axP4w4HN.css">
+</head>
+
+<body class="bg-gray-50 text-gray-900 antialiased">
+  <header class="bg-white sticky top-0 z-50" id="site-header">
+    <div class="border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6"> <!-- 3-column grid: logo | search (centred) | actions -->
+        <div class="grid grid-cols-[auto_1fr_auto] items-center h-16 gap-4"> <!-- Logo --> <a href="/"
+            class="flex items-center gap-2.5 shrink-0">
+            <div class="leading-none">
+              <div class="font-black text-base text-gray-900 tracking-tight"> <img src="/aayi-logo.png"
+                  alt="AAYI Mart logo" width="100" height="40" class="object-contain"> </div>
+              <div class="text-[10px] font-bold text-primary-600 tracking-widest uppercase hidden sm:block">Supermarket
+              </div>
+            </div>
+          </a> <!-- Search bar — centred in its column -->
+          <div class="hidden md:flex justify-center">
+            <div class="relative w-full max-w-xl"> <i
+                class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none"></i>
+              <input id="header-search" type="text" placeholder="Search products, brands..."
+                class="w-full bg-gray-100 hover:bg-gray-50 focus:bg-white border-2 border-transparent focus:border-primary-300 rounded-2xl px-4 py-2.5 pl-10 pr-28 text-sm focus:outline-none focus:ring-2 focus:ring-primary-100 transition-all placeholder:text-gray-400"
+                autocomplete="off"> <button id="search-btn"
+                class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary-600 hover:bg-primary-500 text-white text-xs font-bold px-4 py-1.5 rounded-xl transition-colors whitespace-nowrap">
+                Search
+              </button> </div>
+          </div> <!-- Right actions -->
+          <div class="flex items-center gap-2"> <!-- Cart --> <a href="/cart"
+              class="relative flex items-center gap-2 bg-primary-600 hover:bg-primary-500 text-white font-bold px-4 py-2 rounded-xl transition-colors text-sm">
+              <i class="fa-solid fa-cart-shopping"></i> <span class="hidden sm:block">Cart</span> <span
+                class="cart-count absolute -top-2 -right-2 w-5 h-5 bg-rose-500 text-white text-[10px] font-black rounded-full items-center justify-center shadow-lg"
+                style="display:none">0</span> </a> <!-- Admin link --> <a href="/admin/login"
+              class="hidden lg:flex items-center gap-1.5 text-xs text-gray-400 hover:text-gray-700 transition-colors px-3 py-2 rounded-xl hover:bg-gray-100">
+              <i class="fa-solid fa-lock text-[10px]"></i>Admin
+            </a> <!-- Mobile hamburger --> <button id="menu-toggle"
+              class="md:hidden p-2.5 rounded-xl hover:bg-gray-100 transition-colors" aria-label="Menu">
+              <div class="w-5 flex flex-col gap-1.5" id="burger-lines"> <span
+                  class="block h-0.5 bg-gray-700 rounded transition-all duration-300" id="b1"></span> <span
+                  class="block h-0.5 bg-gray-700 rounded transition-all duration-300" id="b2"></span> <span
+                  class="block h-0.5 bg-gray-700 rounded transition-all duration-300 w-3/4" id="b3"></span> </div>
+            </button> </div>
+        </div>
+      </div>
+    </div> <!-- Desktop sub-nav -->
+    <div class="hidden md:block bg-white border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center h-10 gap-1"> <a href="/"
+            class="px-4 py-1.5 rounded-lg text-sm font-medium transition-all bg-primary-50 text-primary-700 font-semibold">Home</a><a
+            href="/shop"
+            class="px-4 py-1.5 rounded-lg text-sm font-medium transition-all text-gray-500 hover:text-gray-900 hover:bg-gray-50">Shop</a><a
+            href="/categories"
+            class="px-4 py-1.5 rounded-lg text-sm font-medium transition-all text-gray-500 hover:text-gray-900 hover:bg-gray-50">Categories</a><a
+            href="/about"
+            class="px-4 py-1.5 rounded-lg text-sm font-medium transition-all text-gray-500 hover:text-gray-900 hover:bg-gray-50">About</a><a
+            href="/contact"
+            class="px-4 py-1.5 rounded-lg text-sm font-medium transition-all text-gray-500 hover:text-gray-900 hover:bg-gray-50">Contact</a>
+          <div class="ml-auto flex items-center gap-4 text-xs text-gray-400"> <span class="flex items-center gap-1.5"><i
+                class="fa-solid fa-truck-fast text-primary-500"></i>Free delivery ₹499+</span> <span
+              class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-primary-500"></i>100%
+              Genuine</span> </div>
+        </div>
+      </div>
+    </div> <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden absolute w-full bg-white border-b border-gray-100 shadow-xl z-50">
+      <!-- Mobile search -->
+      <div class="px-4 pt-4 pb-3 border-b border-gray-100">
+        <div class="relative"> <i
+            class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+          <input id="mobile-search" type="text" placeholder="Search products..."
+            class="w-full bg-gray-100 rounded-2xl px-4 py-2.5 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 focus:bg-white transition-all">
+        </div>
+      </div> <!-- Mobile links -->
+      <nav class="px-4 py-3 grid grid-cols-2 gap-2"> <a href="/"
+          class="flex items-center gap-2.5 px-4 py-3 rounded-2xl text-sm font-medium transition-colors bg-primary-50 text-primary-700 font-semibold">Home</a><a
+          href="/shop"
+          class="flex items-center gap-2.5 px-4 py-3 rounded-2xl text-sm font-medium transition-colors text-gray-700 hover:bg-gray-50">Shop</a><a
+          href="/categories"
+          class="flex items-center gap-2.5 px-4 py-3 rounded-2xl text-sm font-medium transition-colors text-gray-700 hover:bg-gray-50">Categories</a><a
+          href="/about"
+          class="flex items-center gap-2.5 px-4 py-3 rounded-2xl text-sm font-medium transition-colors text-gray-700 hover:bg-gray-50">About</a><a
+          href="/contact"
+          class="flex items-center gap-2.5 px-4 py-3 rounded-2xl text-sm font-medium transition-colors text-gray-700 hover:bg-gray-50">Contact</a>
+        <a href="/admin/login"
+          class="flex items-center gap-2.5 px-4 py-3 rounded-2xl text-sm font-medium text-gray-400 hover:bg-gray-50 col-span-1">
+          <i class="fa-solid fa-lock text-[11px]"></i>Admin
+        </a> </nav> <!-- Trust badges -->
+      <div class="px-4 pb-4 flex flex-wrap gap-3 text-xs text-gray-400 border-t border-gray-50 pt-3"> <span><i
+            class="fa-solid fa-truck-fast text-primary-500 mr-1"></i>Free delivery ₹499+</span> <span><i
+            class="fa-solid fa-rotate-left text-primary-500 mr-1"></i>Easy returns</span> <span><i
+            class="fa-solid fa-shield-halved text-primary-500 mr-1"></i>Secure shopping</span> </div>
+    </div>
+  </header>
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const b1 = document.getElementById('b1'), b2 = document.getElementById('b2'), b3 = document.getElementById('b3');
+    let open = false;
+
+    toggle.addEventListener('click', () => {
+      open = !open;
+      menu.classList.toggle('hidden', !open);
+      if (open) {
+        b1.style.cssText = 'transform:translateY(8px) rotate(45deg)';
+        b2.style.opacity = '0';
+        b3.style.cssText = 'transform:translateY(-8px) rotate(-45deg);width:100%';
+      } else {
+        b1.style.cssText = b2.style.cssText = b3.style.cssText = '';
+      }
+    });
+
+    // Scroll shadow
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) header.style.boxShadow = '0 4px 24px rgba(0,0,0,0.08)';
+      else header.style.boxShadow = '';
+    }, { passive: true });
+
+    function doSearch(q) { if (q.trim()) window.location.href = `/shop?q=${encodeURIComponent(q.trim())}`; }
+    const hs = document.getElementById('header-search');
+    const ms = document.getElementById('mobile-search');
+    document.getElementById('search-btn').addEventListener('click', () => doSearch(hs.value));
+    hs.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(hs.value); });
+    if (ms) ms.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(ms.value); });
+  </script>
+  <section class="bg-[#0b1120] px-4 sm:px-6 pt-6 pb-6">
+    <div class="max-w-7xl mx-auto"> <!-- ── BENTO GRID ─────────────────────────────────────────────── -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <!-- ❶ MAIN CARD (white, col-span-2) ─────────────────────────── -->
+        <div class="lg:col-span-2 bg-white rounded-[2rem] p-7 sm:p-10 relative overflow-hidden">
+          <!-- Decorative green arc top-right -->
+          <div class="absolute -top-16 -right-16 w-56 h-56 bg-primary-50 rounded-full pointer-events-none"></div>
+          <div class="absolute -top-8 -right-8 w-32 h-32 bg-primary-100 rounded-full pointer-events-none"></div>
+          <div class="relative"> <!-- Live badge -->
+            <div
+              class="inline-flex items-center gap-2.5 bg-gray-900 text-white text-xs font-bold px-4 py-2 rounded-full mb-7">
+              <span class="relative flex h-2 w-2"> <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span> </span>
+              Now Open &nbsp;·&nbsp; 7 AM – 10 PM &nbsp;·&nbsp; FSSAI Certified
+            </div> <!-- Headline -->
+            <h1
+              class="text-[2.4rem] sm:text-5xl xl:text-[3.4rem] font-black text-gray-900 leading-[1.06] tracking-tight mb-4">
+              Fresh Groceries<br>
+              Delivered to<br> <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 via-emerald-500 to-primary-500">Your
+                Doorstep.</span> </h1>
+            <p class="text-gray-500 text-base max-w-lg mb-8 leading-relaxed">
+              Shop 5,000+ genuine products from 200+ trusted brands — daily essentials, snacks, personal care and more —
+              delivered in under 60 minutes.
+            </p> <!-- Search bar -->
+            <div class="flex gap-2 max-w-xl mb-7">
+              <div class="relative flex-1">
+                <div
+                  class="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-primary-600 rounded-xl flex items-center justify-center pointer-events-none">
+                  <i class="fa-solid fa-magnifying-glass text-white text-xs"></i> </div> <input id="hero-search"
+                  type="text" placeholder="Search for milk, soap, chips..."
+                  class="w-full border-2 border-gray-100 bg-gray-50 focus:bg-white focus:border-primary-400 rounded-2xl py-3.5 pl-14 pr-4 text-sm font-medium focus:outline-none transition-all">
+              </div> <button id="hero-search-btn"
+                class="bg-primary-600 hover:bg-primary-500 active:scale-95 text-white font-black px-6 py-3.5 rounded-2xl transition-all hover:shadow-lg hover:shadow-primary-600/30 text-sm whitespace-nowrap">
+                Search
+              </button>
+            </div> <!-- CTA row -->
+            <div class="flex flex-wrap gap-3 mb-9"> <a href="/shop"
+                class="inline-flex items-center gap-2.5 bg-gray-900 hover:bg-gray-700 text-white font-black px-7 py-3.5 rounded-2xl transition-all text-sm">
+                <i class="fa-solid fa-cart-shopping text-primary-400"></i>Shop Now
+              </a> <a href="/shop"
+                class="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-500 text-white font-bold px-6 py-3.5 rounded-2xl transition-all hover:shadow-lg hover:shadow-primary-600/30 text-sm">
+                <i class="fa-solid fa-tags text-xs"></i>View Deals
+              </a> <a href="/categories"
+                class="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-6 py-3.5 rounded-2xl transition-all text-sm">
+                <i class="fa-solid fa-border-all text-primary-500 text-xs"></i>Categories
+              </a> </div> <!-- Stats strip -->
+            <div class="flex flex-wrap gap-6 pt-6 border-t border-gray-100">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 bg-primary-50 rounded-xl flex items-center justify-center shrink-0"> <i
+                    class="fa-solid fa-users text-primary-600 text-sm"></i> </div>
+                <div>
+                  <div class="font-black text-gray-900 text-sm leading-none">10,000+</div>
+                  <div class="text-[10px] text-gray-400 font-medium mt-0.5">Happy Customers</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 bg-blue-50 rounded-xl flex items-center justify-center shrink-0"> <i
+                    class="fa-solid fa-building text-blue-600 text-sm"></i> </div>
+                <div>
+                  <div class="font-black text-gray-900 text-sm leading-none">200+</div>
+                  <div class="text-[10px] text-gray-400 font-medium mt-0.5">Trusted Brands</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 bg-violet-50 rounded-xl flex items-center justify-center shrink-0"> <i
+                    class="fa-solid fa-boxes-stacked text-violet-600 text-sm"></i> </div>
+                <div>
+                  <div class="font-black text-gray-900 text-sm leading-none">5,000+</div>
+                  <div class="text-[10px] text-gray-400 font-medium mt-0.5">Products Listed</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 bg-amber-50 rounded-xl flex items-center justify-center shrink-0"> <i
+                    class="fa-solid fa-star text-amber-500 text-sm"></i> </div>
+                <div>
+                  <div class="font-black text-gray-900 text-sm leading-none">4.9 / 5</div>
+                  <div class="text-[10px] text-gray-400 font-medium mt-0.5">Customer Rating</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> <!-- ── RIGHT COLUMN ──────────────────────────────────────────── -->
+        <div class="flex flex-col gap-4"> <!-- ❷ DELIVERY CARD (green) -->
+          <div class="bg-primary-600 rounded-[2rem] p-7 relative overflow-hidden flex-1">
+            <!-- Background watermark icon -->
+            <div
+              class="absolute -right-5 -bottom-5 w-36 h-36 bg-primary-500/50 rounded-3xl flex items-center justify-center rotate-12">
+              <i class="fa-solid fa-truck-fast text-white/20 text-6xl"></i> </div>
+            <div class="relative">
+              <div class="w-12 h-12 bg-white/15 rounded-2xl flex items-center justify-center mb-5"> <i
+                  class="fa-solid fa-truck-fast text-white text-xl"></i> </div>
+              <div class="text-primary-200 text-[10px] font-black uppercase tracking-widest mb-1">Express Delivery</div>
+              <div class="text-white font-black text-5xl leading-none mb-1">60<span class="text-2xl font-bold">
+                  min</span></div>
+              <div class="text-primary-200 text-sm mb-5">Same-day delivery across all of Bengaluru</div>
+              <div class="space-y-2.5">
+                <div class="flex items-center gap-2.5 text-white/85 text-xs font-medium"> <i
+                    class="fa-solid fa-circle-check text-primary-300 text-xs shrink-0"></i> Free delivery above ₹499
+                </div>
+                <div class="flex items-center gap-2.5 text-white/85 text-xs font-medium"> <i
+                    class="fa-solid fa-circle-check text-primary-300 text-xs shrink-0"></i> Live order tracking </div>
+                <div class="flex items-center gap-2.5 text-white/85 text-xs font-medium"> <i
+                    class="fa-solid fa-circle-check text-primary-300 text-xs shrink-0"></i> Contactless delivery </div>
+              </div> <a href="/shop"
+                class="mt-6 flex items-center gap-2 text-white/70 hover:text-white text-xs font-bold transition-colors">
+                Order now <i class="fa-solid fa-arrow-right text-[10px]"></i> </a>
+            </div>
+          </div> <!-- ❸ CATEGORY GRID CARD (white) -->
+          <div class="bg-white rounded-[2rem] p-6">
+            <div class="flex items-center justify-between mb-5">
+              <div>
+                <div class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-0.5">Browse</div>
+                <div class="font-black text-gray-900">Shop by Category</div>
+              </div> <a href="/categories"
+                class="text-xs font-bold text-primary-600 hover:text-primary-700 transition-colors flex items-center gap-1">
+                All <i class="fa-solid fa-chevron-right text-[9px]"></i> </a>
+            </div>
+            <div class="grid grid-cols-3 gap-2.5"> <a href="/shop?cat=personal-care"
+                class="flex flex-col items-center gap-1.5 p-3 bg-emerald-50 rounded-2xl hover:opacity-80 active:scale-95 transition-all cursor-pointer">
+                <i class="fa-solid fa-soap text-primary-600 text-xl"></i> <span
+                  class="text-[9px] font-bold text-gray-600 text-center leading-tight">Personal Care</span> </a><a
+                href="/shop?cat=snacks"
+                class="flex flex-col items-center gap-1.5 p-3 bg-orange-50 rounded-2xl hover:opacity-80 active:scale-95 transition-all cursor-pointer">
+                <i class="fa-solid fa-cookie-bite text-orange-500 text-xl"></i> <span
+                  class="text-[9px] font-bold text-gray-600 text-center leading-tight">Snacks</span> </a><a
+                href="/shop?cat=beverages"
+                class="flex flex-col items-center gap-1.5 p-3 bg-blue-50 rounded-2xl hover:opacity-80 active:scale-95 transition-all cursor-pointer">
+                <i class="fa-solid fa-glass-water text-blue-500 text-xl"></i> <span
+                  class="text-[9px] font-bold text-gray-600 text-center leading-tight">Beverages</span> </a><a
+                href="/shop?cat=household"
+                class="flex flex-col items-center gap-1.5 p-3 bg-purple-50 rounded-2xl hover:opacity-80 active:scale-95 transition-all cursor-pointer">
+                <i class="fa-solid fa-broom text-purple-500 text-xl"></i> <span
+                  class="text-[9px] font-bold text-gray-600 text-center leading-tight">Household</span> </a><a
+                href="/shop?cat=dairy"
+                class="flex flex-col items-center gap-1.5 p-3 bg-amber-50 rounded-2xl hover:opacity-80 active:scale-95 transition-all cursor-pointer">
+                <i class="fa-solid fa-droplet text-amber-500 text-xl"></i> <span
+                  class="text-[9px] font-bold text-gray-600 text-center leading-tight">Dairy</span> </a><a
+                href="/shop?cat=bakery"
+                class="flex flex-col items-center gap-1.5 p-3 bg-rose-50 rounded-2xl hover:opacity-80 active:scale-95 transition-all cursor-pointer">
+                <i class="fa-solid fa-bread-slice text-rose-500 text-xl"></i> <span
+                  class="text-[9px] font-bold text-gray-600 text-center leading-tight">Bakery</span> </a> </div>
+          </div>
+        </div><!-- end right col -->
+      </div><!-- end bento grid --> <!-- ── TRUST BAR (below bento, dark) ──────────────────────────── -->
+      <div
+        class="mt-4 bg-white/5 border border-white/8 rounded-2xl px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-2.5 text-white/60 text-xs font-medium"> <i
+            class="fa-solid fa-leaf text-primary-400 text-sm"></i> 100% Fresh &amp; Genuine </div>
+        <div class="flex items-center gap-2.5 text-white/60 text-xs font-medium"> <i
+            class="fa-solid fa-shield-halved text-primary-400 text-sm"></i> Secure Payments </div>
+        <div class="flex items-center gap-2.5 text-white/60 text-xs font-medium"> <i
+            class="fa-solid fa-rotate-left text-primary-400 text-sm"></i> Easy 7-Day Returns </div>
+        <div class="flex items-center gap-2.5 text-white/60 text-xs font-medium"> <i
+            class="fa-solid fa-headset text-primary-400 text-sm"></i> 24/7 Customer Support </div>
+        <div class="flex items-center gap-2.5 text-white/60 text-xs font-medium"> <i
+            class="fa-solid fa-certificate text-primary-400 text-sm"></i> FSSAI Certified Store </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-10 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between mb-6">
+        <div>
+          <p class="section-label">Shop by</p>
+          <h2 class="section-title">Categories</h2>
+        </div> <a href="/categories"
+          class="text-sm font-semibold text-primary-600 hover:text-primary-700 flex items-center gap-1.5 transition-colors">
+          All categories <i class="fa-solid fa-arrow-right text-xs"></i> </a>
+      </div>
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-3"> <a href="/shop?cat=personal-care"
+          class="group flex flex-col items-center gap-3 p-4 sm:p-5 rounded-3xl bg-emerald-50 border-2 border-transparent hover:bg-primary-100 hover:border-primary-300 transition-all duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer">
+          <div
+            class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-200">
+            <i class="fa-solid fa-soap text-primary-600 text-xl"></i> </div> <span
+            class="text-xs font-bold text-gray-700 text-center leading-tight">Personal Care</span>
+        </a><a href="/shop?cat=snacks"
+          class="group flex flex-col items-center gap-3 p-4 sm:p-5 rounded-3xl bg-orange-50 border-2 border-transparent hover:bg-orange-100 hover:border-orange-300 transition-all duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer">
+          <div
+            class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-200">
+            <i class="fa-solid fa-cookie-bite text-orange-500 text-xl"></i> </div> <span
+            class="text-xs font-bold text-gray-700 text-center leading-tight">Snacks</span>
+        </a><a href="/shop?cat=beverages"
+          class="group flex flex-col items-center gap-3 p-4 sm:p-5 rounded-3xl bg-blue-50 border-2 border-transparent hover:bg-blue-100 hover:border-blue-300 transition-all duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer">
+          <div
+            class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-200">
+            <i class="fa-solid fa-glass-water text-blue-500 text-xl"></i> </div> <span
+            class="text-xs font-bold text-gray-700 text-center leading-tight">Beverages</span>
+        </a><a href="/shop?cat=household"
+          class="group flex flex-col items-center gap-3 p-4 sm:p-5 rounded-3xl bg-purple-50 border-2 border-transparent hover:bg-purple-100 hover:border-purple-300 transition-all duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer">
+          <div
+            class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-200">
+            <i class="fa-solid fa-broom text-purple-500 text-xl"></i> </div> <span
+            class="text-xs font-bold text-gray-700 text-center leading-tight">Household</span>
+        </a><a href="/shop?cat=dairy"
+          class="group flex flex-col items-center gap-3 p-4 sm:p-5 rounded-3xl bg-amber-50 border-2 border-transparent hover:bg-amber-100 hover:border-amber-300 transition-all duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer">
+          <div
+            class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-200">
+            <i class="fa-solid fa-droplet text-amber-500 text-xl"></i> </div> <span
+            class="text-xs font-bold text-gray-700 text-center leading-tight">Dairy</span>
+        </a><a href="/shop?cat=bakery"
+          class="group flex flex-col items-center gap-3 p-4 sm:p-5 rounded-3xl bg-rose-50 border-2 border-transparent hover:bg-rose-100 hover:border-rose-300 transition-all duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer">
+          <div
+            class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-200">
+            <i class="fa-solid fa-bread-slice text-rose-500 text-xl"></i> </div> <span
+            class="text-xs font-bold text-gray-700 text-center leading-tight">Bakery</span>
+        </a> </div>
+    </div>
+  </section>
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <p class="section-label">Handpicked for you</p>
+          <h2 class="section-title">Featured Products</h2>
+        </div> <a href="/shop"
+          class="text-sm font-semibold text-primary-600 hover:text-primary-700 flex items-center gap-1.5 transition-colors">
+          View all <i class="fa-solid fa-arrow-right text-xs"></i> </a>
+      </div>
+      <div id="featured-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <!-- JS populated -->
+        <div class="rounded-3xl overflow-hidden border border-gray-100 bg-white">
+          <div class="skeleton aspect-square w-full"></div>
+          <div class="p-4 space-y-2">
+            <div class="skeleton h-3 w-16 rounded-full"></div>
+            <div class="skeleton h-4 rounded-lg"></div>
+            <div class="skeleton h-4 w-3/4 rounded-lg"></div>
+            <div class="skeleton h-4 w-12 rounded-full mt-2"></div>
+          </div>
+        </div>
+        <div class="rounded-3xl overflow-hidden border border-gray-100 bg-white">
+          <div class="skeleton aspect-square w-full"></div>
+          <div class="p-4 space-y-2">
+            <div class="skeleton h-3 w-16 rounded-full"></div>
+            <div class="skeleton h-4 rounded-lg"></div>
+            <div class="skeleton h-4 w-3/4 rounded-lg"></div>
+            <div class="skeleton h-4 w-12 rounded-full mt-2"></div>
+          </div>
+        </div>
+        <div class="rounded-3xl overflow-hidden border border-gray-100 bg-white">
+          <div class="skeleton aspect-square w-full"></div>
+          <div class="p-4 space-y-2">
+            <div class="skeleton h-3 w-16 rounded-full"></div>
+            <div class="skeleton h-4 rounded-lg"></div>
+            <div class="skeleton h-4 w-3/4 rounded-lg"></div>
+            <div class="skeleton h-4 w-12 rounded-full mt-2"></div>
+          </div>
+        </div>
+        <div class="rounded-3xl overflow-hidden border border-gray-100 bg-white">
+          <div class="skeleton aspect-square w-full"></div>
+          <div class="p-4 space-y-2">
+            <div class="skeleton h-3 w-16 rounded-full"></div>
+            <div class="skeleton h-4 rounded-lg"></div>
+            <div class="skeleton h-4 w-3/4 rounded-lg"></div>
+            <div class="skeleton h-4 w-12 rounded-full mt-2"></div>
+          </div>
+        </div>
+        <div class="rounded-3xl overflow-hidden border border-gray-100 bg-white">
+          <div class="skeleton aspect-square w-full"></div>
+          <div class="p-4 space-y-2">
+            <div class="skeleton h-3 w-16 rounded-full"></div>
+            <div class="skeleton h-4 rounded-lg"></div>
+            <div class="skeleton h-4 w-3/4 rounded-lg"></div>
+            <div class="skeleton h-4 w-12 rounded-full mt-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-8 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4"> <!-- Banner 1 -->
+        <div
+          class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-primary-600 to-emerald-500 p-6 sm:p-7 flex items-center gap-5 sm:gap-6">
+          <div
+            class="absolute right-4 top-1/2 -translate-y-1/2 w-28 h-28 bg-white/10 rounded-3xl flex items-center justify-center">
+            <i class="fa-solid fa-leaf text-white/20 text-7xl"></i> </div>
+          <div
+            class="w-16 h-16 sm:w-20 sm:h-20 bg-white/15 backdrop-blur rounded-2xl flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-soap text-white text-3xl sm:text-4xl"></i> </div>
+          <div class="z-10">
+            <div class="text-white/70 text-xs font-bold uppercase tracking-widest mb-1">Personal Care</div>
+            <div class="text-white font-black text-xl sm:text-2xl leading-tight mb-1.5">Up to 30% off</div>
+            <div class="text-white/80 text-sm mb-4">On all soaps, shampoos &amp; more</div> <a
+              href="/shop?cat=personal-care"
+              class="inline-flex items-center gap-2 bg-white text-primary-700 font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-primary-50 transition-colors">
+              Shop Now <i class="fa-solid fa-arrow-right text-xs"></i> </a>
+          </div>
+        </div> <!-- Banner 2 -->
+        <div
+          class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-rose-500 to-orange-400 p-6 sm:p-7 flex items-center gap-5 sm:gap-6">
+          <div
+            class="absolute right-4 top-1/2 -translate-y-1/2 w-28 h-28 bg-white/10 rounded-3xl flex items-center justify-center">
+            <i class="fa-solid fa-bolt text-white/20 text-7xl"></i> </div>
+          <div
+            class="w-16 h-16 sm:w-20 sm:h-20 bg-white/15 backdrop-blur rounded-2xl flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-cookie-bite text-white text-3xl sm:text-4xl"></i> </div>
+          <div class="z-10">
+            <div class="text-white/70 text-xs font-bold uppercase tracking-widest mb-1">Snacks &amp; Chocolates</div>
+            <div class="text-white font-black text-xl sm:text-2xl leading-tight mb-1.5">Best deals today</div>
+            <div class="text-white/80 text-sm mb-4">Chocolates, chips, cookies &amp; more</div> <a
+              href="/shop?cat=snacks"
+              class="inline-flex items-center gap-2 bg-white text-rose-600 font-bold text-sm px-5 py-2.5 rounded-xl hover:bg-rose-50 transition-colors">
+              Shop Now <i class="fa-solid fa-arrow-right text-xs"></i> </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <p class="section-label">Limited Time</p>
+          <h2 class="section-title flex items-center gap-3">Today's Best Deals <span
+              class="inline-flex items-center justify-center w-8 h-8 bg-rose-100 rounded-xl"><i
+                class="fa-solid fa-fire text-rose-500 text-sm"></i></span></h2>
+        </div> <a href="/shop"
+          class="text-sm font-semibold text-primary-600 hover:text-primary-700 flex items-center gap-1.5 transition-colors">
+          See all <i class="fa-solid fa-arrow-right text-xs"></i> </a>
+      </div>
+      <div id="deals-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div class="rounded-3xl overflow-hidden border border-gray-100 bg-white">
+          <div class="skeleton aspect-square w-full"></div>
+          <div class="p-4 space-y-2">
+            <div class="skeleton h-3 w-16 rounded-full"></div>
+            <div class="skeleton h-4 rounded-lg"></div>
+            <div class="skeleton h-4 w-12 rounded-full mt-2"></div>
+          </div>
+        </div>
+        <div class="rounded-3xl overflow-hidden border border-gray-100 bg-white">
+          <div class="skeleton aspect-square w-full"></div>
+          <div class="p-4 space-y-2">
+            <div class="skeleton h-3 w-16 rounded-full"></div>
+            <div class="skeleton h-4 rounded-lg"></div>
+            <div class="skeleton h-4 w-12 rounded-full mt-2"></div>
+          </div>
+        </div>
+        <div class="rounded-3xl overflow-hidden border border-gray-100 bg-white">
+          <div class="skeleton aspect-square w-full"></div>
+          <div class="p-4 space-y-2">
+            <div class="skeleton h-3 w-16 rounded-full"></div>
+            <div class="skeleton h-4 rounded-lg"></div>
+            <div class="skeleton h-4 w-12 rounded-full mt-2"></div>
+          </div>
+        </div>
+        <div class="rounded-3xl overflow-hidden border border-gray-100 bg-white">
+          <div class="skeleton aspect-square w-full"></div>
+          <div class="p-4 space-y-2">
+            <div class="skeleton h-3 w-16 rounded-full"></div>
+            <div class="skeleton h-4 rounded-lg"></div>
+            <div class="skeleton h-4 w-12 rounded-full mt-2"></div>
+          </div>
+        </div>
+        <div class="rounded-3xl overflow-hidden border border-gray-100 bg-white">
+          <div class="skeleton aspect-square w-full"></div>
+          <div class="p-4 space-y-2">
+            <div class="skeleton h-3 w-16 rounded-full"></div>
+            <div class="skeleton h-4 rounded-lg"></div>
+            <div class="skeleton h-4 w-12 rounded-full mt-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-16 bg-[#0b1120]">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <p class="section-label text-primary-400">Why Choose Us</p>
+        <h2 class="text-3xl font-black text-white">The AAYI Mart Promise</h2>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-7 hover:bg-white/8 transition-colors">
+          <div
+            class="w-12 h-12 bg-gradient-to-br from-primary-500 to-emerald-400 rounded-2xl flex items-center justify-center mb-5 shadow-lg">
+            <i class="fa-solid fa-leaf text-white text-lg"></i> </div>
+          <h3 class="font-black text-white text-base mb-2">100% Fresh</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Every product checked for freshness. No expired items — ever.
+          </p>
+        </div>
+        <div class="bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-7 hover:bg-white/8 transition-colors">
+          <div
+            class="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-400 rounded-2xl flex items-center justify-center mb-5 shadow-lg">
+            <i class="fa-solid fa-tags text-white text-lg"></i> </div>
+          <h3 class="font-black text-white text-base mb-2">Best Prices</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Everyday low prices with weekly deals. No hidden charges.</p>
+        </div>
+        <div class="bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-7 hover:bg-white/8 transition-colors">
+          <div
+            class="w-12 h-12 bg-gradient-to-br from-blue-500 to-sky-400 rounded-2xl flex items-center justify-center mb-5 shadow-lg">
+            <i class="fa-solid fa-truck-fast text-white text-lg"></i> </div>
+          <h3 class="font-black text-white text-base mb-2">Fast Delivery</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Same-day delivery within 60 minutes for orders placed by 8
+            PM.</p>
+        </div>
+        <div class="bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-7 hover:bg-white/8 transition-colors">
+          <div
+            class="w-12 h-12 bg-gradient-to-br from-purple-500 to-violet-400 rounded-2xl flex items-center justify-center mb-5 shadow-lg">
+            <i class="fa-solid fa-headset text-white text-lg"></i> </div>
+          <h3 class="font-black text-white text-base mb-2">24/7 Support</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Our care team is always here to assist you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-14 bg-white">
+    <div class="max-w-xl mx-auto px-4 text-center">
+      <div class="w-16 h-16 bg-primary-50 rounded-3xl flex items-center justify-center mx-auto mb-6"> <i
+          class="fa-solid fa-envelope-open-text text-primary-600 text-2xl"></i> </div>
+      <h2 class="text-2xl font-black text-gray-900 mb-2">Get Weekly Deals</h2>
+      <p class="text-gray-500 text-sm mb-8">Subscribe for exclusive offers, fresh arrivals, and deals every week.</p>
+      <form id="newsletter-form" class="flex gap-2 max-w-sm mx-auto"> <input type="email" placeholder="your@email.com"
+          class="flex-1 bg-gray-100 border-2 border-transparent focus:border-primary-400 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:bg-white transition-all"
+          required> <button type="submit" class="btn-primary px-5 py-3 whitespace-nowrap text-sm">Subscribe</button>
+      </form>
+      <p class="text-xs text-gray-400 mt-3">No spam. Unsubscribe anytime.</p>
+    </div>
+  </section>
+  <footer class="bg-[#0b1120] text-gray-400 mt-16"> <!-- Main footer -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10"> <!-- Brand -->
+        <div class="lg:col-span-1">
+          <div class="flex items-center gap-3 mb-5">
+            <div
+              class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-lg shadow-primary-900/40">
+              <i class="fa-solid fa-leaf text-white text-base"></i> </div>
+            <div>
+              <div class="font-black text-lg text-white tracking-tight">AAYI Mart</div>
+              <div class="text-[10px] font-bold text-primary-500 tracking-widest uppercase">Supermarket</div>
+            </div>
+          </div>
+          <p class="text-sm text-gray-500 leading-relaxed mb-6">Your trusted neighbourhood supermarket for fresh
+            produce, daily essentials, and everything in between — delivered fast.</p>
+          <div class="flex gap-2.5"> <a href="#"
+              class="w-9 h-9 bg-white/5 hover:bg-primary-600 border border-white/10 hover:border-primary-500 rounded-xl flex items-center justify-center transition-all duration-200">
+              <i class="fa-brands fa-facebook-f text-xs text-gray-400 hover:text-white"></i> </a><a href="#"
+              class="w-9 h-9 bg-white/5 hover:bg-primary-600 border border-white/10 hover:border-primary-500 rounded-xl flex items-center justify-center transition-all duration-200">
+              <i class="fa-brands fa-instagram text-xs text-gray-400 hover:text-white"></i> </a><a href="#"
+              class="w-9 h-9 bg-white/5 hover:bg-primary-600 border border-white/10 hover:border-primary-500 rounded-xl flex items-center justify-center transition-all duration-200">
+              <i class="fa-brands fa-x-twitter text-xs text-gray-400 hover:text-white"></i> </a><a href="#"
+              class="w-9 h-9 bg-white/5 hover:bg-primary-600 border border-white/10 hover:border-primary-500 rounded-xl flex items-center justify-center transition-all duration-200">
+              <i class="fa-brands fa-youtube text-xs text-gray-400 hover:text-white"></i> </a> </div>
+        </div> <!-- Quick Links -->
+        <div>
+          <h5 class="text-xs font-black text-white uppercase tracking-widest mb-5">Quick Links</h5>
+          <ul class="space-y-3 text-sm">
+            <li><a href="/" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Home</a></li>
+            <li><a href="/shop" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Shop All</a>
+            </li>
+            <li><a href="/categories"
+                class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Categories</a></li>
+            <li><a href="/about" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">About Us</a>
+            </li>
+            <li><a href="/contact"
+                class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Contact</a></li>
+            <li><a href="/cart" class="text-gray-500 hover:text-primary-400 transition-colors font-medium">My Cart</a>
+            </li>
+          </ul>
+        </div> <!-- Categories -->
+        <div>
+          <h5 class="text-xs font-black text-white uppercase tracking-widest mb-5">Categories</h5>
+          <ul class="space-y-3 text-sm">
+            <li><a href="/shop?cat=personal-care"
+                class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Personal Care</a></li>
+            <li><a href="/shop?cat=snacks"
+                class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Snacks &amp; Chocolates</a>
+            </li>
+            <li><a href="/shop?cat=beverages"
+                class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Beverages</a></li>
+            <li><a href="/shop?cat=household"
+                class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Household Cleaning</a></li>
+            <li><a href="/shop?cat=dairy"
+                class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Dairy &amp; Eggs</a></li>
+            <li><a href="/shop?cat=bakery"
+                class="text-gray-500 hover:text-primary-400 transition-colors font-medium">Bakery &amp; Bread</a></li>
+          </ul>
+        </div> <!-- Contact -->
+        <div>
+          <h5 class="text-xs font-black text-white uppercase tracking-widest mb-5">Contact Us</h5>
+          <ul class="space-y-4 text-sm">
+            <li class="flex gap-3 items-start">
+              <div class="w-7 h-7 bg-white/5 rounded-lg flex items-center justify-center shrink-0 mt-0.5"> <i
+                  class="fa-solid fa-location-dot text-primary-500 text-xs"></i> </div> <span
+                class="text-gray-500 leading-relaxed">42, Market Road, Koramangala,<br>Bengaluru – 560034</span>
+            </li>
+            <li class="flex gap-3 items-center">
+              <div class="w-7 h-7 bg-white/5 rounded-lg flex items-center justify-center shrink-0"> <i
+                  class="fa-solid fa-phone text-primary-500 text-xs"></i> </div> <a href="tel:+918012345678"
+                class="text-gray-500 hover:text-primary-400 transition-colors font-medium">+91 80123 45678</a>
+            </li>
+            <li class="flex gap-3 items-center">
+              <div class="w-7 h-7 bg-white/5 rounded-lg flex items-center justify-center shrink-0"> <i
+                  class="fa-solid fa-envelope text-primary-500 text-xs"></i> </div> <a href="mailto:hello@aayimart.in"
+                class="text-gray-500 hover:text-primary-400 transition-colors font-medium">hello@aayimart.in</a>
+            </li>
+            <li class="flex gap-3 items-center">
+              <div class="w-7 h-7 bg-white/5 rounded-lg flex items-center justify-center shrink-0"> <i
+                  class="fa-solid fa-clock text-primary-500 text-xs"></i> </div> <span class="text-gray-500">Mon–Sun: 7
+                AM – 10 PM</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div> <!-- Trust strip -->
+    <div class="border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-4 py-5">
+        <div class="flex flex-wrap items-center justify-center gap-6 text-xs text-gray-600"> <span
+            class="flex items-center gap-2"><i class="fa-solid fa-truck-fast text-primary-500"></i>Free delivery
+            ₹499+</span> <span class="flex items-center gap-2"><i
+              class="fa-solid fa-rotate-left text-primary-500"></i>Easy 7-day returns</span> <span
+            class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-primary-500"></i>100% Secure
+            payments</span> <span class="flex items-center gap-2"><i class="fa-solid fa-leaf text-primary-500"></i>FSSAI
+            Certified</span> <span class="flex items-center gap-2"><i
+              class="fa-solid fa-headset text-primary-500"></i>24/7 Support</span> </div>
+      </div>
+    </div> <!-- Bottom bar -->
+    <div class="border-t border-white/5">
+      <div
+        class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-600">
+        <p>© 2025 AAYI Mart Supermarket. All rights reserved.</p>
+        <div class="flex gap-5"> <a href="#" class="hover:text-gray-400 transition-colors">Privacy Policy</a> <a
+            href="#" class="hover:text-gray-400 transition-colors">Terms of Service</a> <a href="/admin/login"
+            class="hover:text-gray-400 transition-colors flex items-center gap-1"><i
+              class="fa-solid fa-lock text-[10px]"></i>Admin</a> </div>
+      </div>
+    </div>
+  </footer> <!-- Toast -->
+  <div id="toast"
+    class="fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-gray-950 text-white px-5 py-3.5 rounded-2xl text-sm font-medium shadow-2xl z-[9999] opacity-0 pointer-events-none min-w-[220px] border border-white/10">
+    <div id="toast-icon" class="w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center shrink-0"> <i
+        class="fa-solid fa-check text-[10px]"></i> </div> <span id="toast-msg">Added to cart!</span>
+  </div>
+  <script>
+    // ── Toast ───────────────────────────────────────────────
+    window.showToast = function (msg, type) {
+      const t = document.getElementById('toast');
+      const ic = document.getElementById('toast-icon');
+      const m = document.getElementById('toast-msg');
+      m.textContent = msg;
+      if (type === 'error') {
+        ic.className = 'w-6 h-6 bg-rose-500 rounded-full flex items-center justify-center shrink-0';
+        ic.innerHTML = '<i class="fa-solid fa-xmark text-[10px]"></i>';
+      } else {
+        ic.className = 'w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center shrink-0';
+        ic.innerHTML = '<i class="fa-solid fa-check text-[10px]"></i>';
+      }
+      t.style.opacity = '1'; t.style.pointerEvents = 'auto';
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => { t.style.opacity = '0'; t.style.pointerEvents = 'none'; }, 2600);
+    };
+
+    // ── Cart ─────────────────────────────────────────────────
+    window.getCart = () => JSON.parse(localStorage.getItem('fm_cart') || '[]');
+    window.saveCart = (cart) => { localStorage.setItem('fm_cart', JSON.stringify(cart)); window.updateCartBadge(); };
+    window.addToCart = function (product) {
+      const cart = window.getCart();
+      const idx = cart.findIndex(i => i.id === product.id);
+      if (idx > -1) cart[idx].qty += 1; else cart.push({ ...product, qty: 1 });
+      window.saveCart(cart);
+      window.showToast(product.name.split(' ').slice(0, 3).join(' ') + ' added!');
+    };
+    window.updateCartBadge = function () {
+      const count = window.getCart().reduce((s, i) => s + i.qty, 0);
+      document.querySelectorAll('.cart-count').forEach(el => {
+        el.textContent = count;
+        el.style.display = count > 0 ? 'flex' : 'none';
+      });
+    };
+
+    // ── Products ─────────────────────────────────────────────
+    window.getProducts = () => JSON.parse(localStorage.getItem('fm_products') || '[]');
+    window.saveProducts = (p) => localStorage.setItem('fm_products', JSON.stringify(p));
+
+    // ── Seed (v3 — with real images) ────────────────────────
+    window.seedProducts = function () {
+      if (localStorage.getItem('fm_seed_v') === '3') return;
+      const u = 'https://images.unsplash.com/photo-';
+      const q = '?w=400&h=400&fit=crop&q=80&auto=format';
+      const products = [
+        { id: 'p1', name: 'Dove Beauty Bar Soap', category: 'personal-care', price: 45, originalPrice: 55, brand: 'Dove', unit: '100g', stock: 150, featured: true, description: 'Moisturizing beauty bar with ¼ cream for soft, smooth skin.', image: u + '1584305574647-0cc949a2bb9f' + q },
+        { id: 'p2', name: 'Head & Shoulders Classic Shampoo', category: 'personal-care', price: 225, originalPrice: 280, brand: 'Head & Shoulders', unit: '340ml', stock: 80, featured: true, description: 'Anti-dandruff shampoo with pyrithione zinc formula.', image: u + '1556228720-195a672e8a03' + q },
+        { id: 'p3', name: 'Pantene Pro-V Smooth Shampoo', category: 'personal-care', price: 199, originalPrice: 240, brand: 'Pantene', unit: '340ml', stock: 90, featured: false, description: '10x stronger hair with Pro-V nutrient blend.', image: u + '1571781926291-c477ebfd024b' + q },
+        { id: 'p4', name: 'Colgate Strong Teeth Toothpaste', category: 'personal-care', price: 75, originalPrice: 90, brand: 'Colgate', unit: '200g', stock: 200, featured: false, description: 'Active calcium formula for strong, cavity-free teeth.', image: u + '1559056199-641a0ac8b55e' + q },
+        { id: 'p5', name: 'KitKat 4-Finger Chocolate Bar', category: 'snacks', price: 30, originalPrice: 35, brand: 'Nestlé', unit: '41.5g', stock: 300, featured: true, description: 'Crispy wafer fingers covered with smooth milk chocolate.', image: u + '1481391319762-47dff72954d9' + q },
+        { id: 'p6', name: 'Cadbury Dairy Milk Chocolate', category: 'snacks', price: 40, originalPrice: 45, brand: 'Cadbury', unit: '50g', stock: 250, featured: true, description: 'The iconic milk chocolate bar with unmistakable creamy taste.', image: u + '1549007994-cb92caebd54b' + q },
+        { id: 'p7', name: "Lay's Classic Salted Chips", category: 'snacks', price: 20, originalPrice: 20, brand: "Lay's", unit: '52g', stock: 180, featured: false, description: 'Perfectly crispy potato chips with classic salted flavor.', image: u + '1566478989037-eec170784d0b' + q },
+        { id: 'p8', name: 'Oreo Original Chocolate Cookies', category: 'snacks', price: 35, originalPrice: 40, brand: 'Oreo', unit: '120g', stock: 220, featured: false, description: 'Classic chocolate sandwich cookies with vanilla cream filling.', image: u + '1558961363-fa8fdf82db35' + q },
+        { id: 'p9', name: 'Parle-G Glucose Biscuits', category: 'snacks', price: 10, originalPrice: 10, brand: 'Parle', unit: '100g', stock: 400, featured: false, description: "India's favourite glucose biscuits — perfect with chai.", image: u + '1499636136210-6f4ee915583e' + q },
+        { id: 'p10', name: 'Maggi 2-Minute Masala Noodles', category: 'snacks', price: 14, originalPrice: 14, brand: 'Nestlé', unit: '70g', stock: 400, featured: true, description: "India's favourite instant noodles. Ready in 2 minutes!", image: u + '1569718212165-3a8278d5f624' + q },
+        { id: 'p11', name: 'Tropicana 100% Orange Juice', category: 'beverages', price: 99, originalPrice: 120, brand: 'Tropicana', unit: '1L', stock: 100, featured: true, description: '100% pure orange juice. No added sugar or preservatives.', image: u + '1621506289937-a8e4df240d0b' + q },
+        { id: 'p12', name: 'Coca-Cola Classic', category: 'beverages', price: 40, originalPrice: 40, brand: 'Coca-Cola', unit: '600ml', stock: 300, featured: false, description: 'The original refreshing cola taste you love.', image: u + '1554866585-cd94860890b7' + q },
+        { id: 'p13', name: 'Real Mango Fruit Juice', category: 'beverages', price: 85, originalPrice: 100, brand: 'Real', unit: '1L', stock: 120, featured: false, description: 'Made with real mango pulp and natural fruit flavor.', image: u + '1546173159-315724a31696' + q },
+        { id: 'p14', name: 'Bisleri Mineral Water', category: 'beverages', price: 20, originalPrice: 20, brand: 'Bisleri', unit: '1L', stock: 500, featured: false, description: 'Pure and safe mineral water with essential minerals.', image: u + '1548839140-29a749e1cf4d' + q },
+        { id: 'p15', name: 'Ariel Matic Detergent Powder', category: 'household', price: 185, originalPrice: 220, brand: 'Ariel', unit: '1kg', stock: 90, featured: false, description: 'Advanced stain removal for top-load washing machines.', image: u + '1585421514284-efb74c2b69ba' + q },
+        { id: 'p16', name: 'Vim Dishwash Liquid', category: 'household', price: 65, originalPrice: 75, brand: 'Vim', unit: '500ml', stock: 140, featured: false, description: 'Powerful dishwash liquid that cuts grease in one wash.', image: u + '1585421514284-efb74c2b69ba' + q },
+        { id: 'p17', name: 'Harpic Power Plus Toilet Cleaner', category: 'household', price: 75, originalPrice: 90, brand: 'Harpic', unit: '500ml', stock: 100, featured: false, description: '10x stronger formula — removes 99.9% germs and limescale.', image: u + '1585421514284-efb74c2b69ba' + q },
+        { id: 'p18', name: 'Amul Taaza Toned Milk', category: 'dairy', price: 28, originalPrice: 28, brand: 'Amul', unit: '500ml', stock: 500, featured: false, description: 'Fresh toned milk with 3.5% fat — your daily nutrition.', image: u + '1563636619-e9143da7973b' + q },
+        { id: 'p19', name: 'Britannia Cheese Slices', category: 'dairy', price: 75, originalPrice: 85, brand: 'Britannia', unit: '200g', stock: 80, featured: true, description: 'Ready-to-use processed cheese slices for burgers & sandwiches.', image: u + '1619566636858-adf3ef46400b' + q },
+        { id: 'p20', name: 'Amul Butter Pasteurized', category: 'dairy', price: 56, originalPrice: 60, brand: 'Amul', unit: '100g', stock: 120, featured: false, description: 'Pure pasteurized butter made from fresh cream.', image: u + '1589985270826-4b7bb135bc9d' + q },
+        { id: 'p21', name: 'Amul Dahi Curd', category: 'dairy', price: 35, originalPrice: 40, brand: 'Amul', unit: '400g', stock: 200, featured: false, description: 'Fresh and thick curd. Rich in probiotics and calcium.', image: u + '1488477181946-6428a0291777' + q },
+        { id: 'p22', name: 'Britannia Multigrain Bread', category: 'bakery', price: 45, originalPrice: 50, brand: 'Britannia', unit: '400g', stock: 80, featured: false, description: 'Soft multigrain bread with oats, wheat and flaxseeds.', image: u + '1509440159596-0249088772ff' + q },
+        { id: 'p23', name: 'Lifebuoy Total 10 Soap', category: 'personal-care', price: 38, originalPrice: 45, brand: 'Lifebuoy', unit: '125g', stock: 180, featured: false, description: 'Activ Silver formula — keeps 10 problems away for 12 hours.', image: u + '1607006344380-b6775a0824a7' + q },
+        { id: 'p24', name: "Lay's Magic Masala Chips", category: 'snacks', price: 20, originalPrice: 20, brand: "Lay's", unit: '52g', stock: 250, featured: false, description: 'Bold masala flavor on crispy potato chips. Utterly Butterly!', image: u + '1621939514649-280e2ee25f60' + q },
+      ];
+      window.saveProducts(products);
+      localStorage.setItem('fm_seed_v', '3');
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      window.seedProducts();
+      window.updateCartBadge();
+    });
+  </script>
+</body>
+
+</html>
+<script>
+  function renderCard(p) {
+    const d = p.originalPrice > p.price ? Math.round((1 - p.price / p.originalPrice) * 100) : 0;
+    return `
+      <div class="product-card flex flex-col">
+        <div class="relative overflow-hidden bg-gradient-to-br from-slate-50 to-gray-100" style="aspect-ratio:1/1">
+          <img src="${p.image}" alt="${p.name}" class="product-img w-full h-full object-contain p-4" loading="lazy"
+            onerror="this.onerror=null;this.src='https://placehold.co/400x400/16a34a/ffffff?text=${encodeURIComponent(p.name.slice(0, 12))}'" />
+          ${d > 0 ? `<div class="badge-discount"><i class="fa-solid fa-bolt text-[8px]"></i>${d}% OFF</div>` : ''}
+          ${p.featured && !d ? `<div class="badge-new">NEW</div>` : ''}
+          ${p.stock === 0 ? `<div class="absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-20"><span class="bg-gray-900 text-white text-xs font-bold px-4 py-1.5 rounded-full">Out of Stock</span></div>` : ''}
+          ${p.stock > 0 ? `
+          <div class="quick-add-overlay absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-3">
+            <button onclick='window.addToCart(${JSON.stringify(p)})' class="w-full bg-white text-gray-900 font-bold text-xs py-2.5 rounded-2xl hover:bg-primary-50 active:scale-95 transition-all">
+              <i class="fa-solid fa-cart-plus mr-1.5 text-primary-600"></i>Quick Add
+            </button>
+          </div>` : ''}
+        </div>
+        <div class="p-4 flex flex-col flex-1">
+          <p class="text-[10px] font-black text-primary-600 uppercase tracking-widest mb-1">${p.brand}</p>
+          <h3 class="font-semibold text-gray-900 text-sm leading-snug line-clamp-2 flex-1 mb-2 min-h-[2.5rem]">${p.name}</h3>
+          <span class="text-[10px] text-gray-400 font-medium bg-gray-100 px-2 py-0.5 rounded-md w-fit mb-3">${p.unit}</span>
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-baseline gap-1.5">
+              <span class="text-base font-black text-gray-900">₹${p.price}</span>
+              ${d > 0 ? `<span class="text-xs text-gray-400 line-through">₹${p.originalPrice}</span>` : ''}
+            </div>
+            <button ${p.stock === 0 ? 'disabled' : ''} onclick='window.addToCart(${JSON.stringify(p)})'
+              class="w-9 h-9 ${p.stock === 0 ? 'bg-gray-200 cursor-not-allowed' : 'bg-primary-600 hover:bg-primary-500 active:scale-90 shadow-md shadow-primary-600/25'} text-white rounded-xl flex items-center justify-center transition-all shrink-0">
+              <i class="fa-solid fa-plus text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const products = window.getProducts();
+
+    const featGrid = document.getElementById('featured-grid');
+    const featured = products.filter(p => p.featured).slice(0, 10);
+    featGrid.innerHTML = featured.length
+      ? featured.map(renderCard).join('')
+      : '<div class="col-span-full text-center py-8 text-gray-400">No featured products.</div>';
+
+    const dealsGrid = document.getElementById('deals-grid');
+    const deals = products.filter(p => p.originalPrice > p.price).slice(0, 10);
+    dealsGrid.innerHTML = deals.length
+      ? deals.map(renderCard).join('')
+      : '<div class="col-span-full text-center py-8 text-gray-400">No deals available.</div>';
+  });
+
+  // Hero search
+  const hBtn = document.getElementById('hero-search-btn');
+  const hInput = document.getElementById('hero-search');
+  function heroSearch() {
+    const q = hInput.value.trim();
+    if (q) window.location.href = `/shop?q=${encodeURIComponent(q)}`;
+  }
+  hBtn.addEventListener('click', heroSearch);
+  hInput.addEventListener('keydown', e => { if (e.key === 'Enter') heroSearch(); });
+  document.querySelectorAll('.hero-chip').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = btn.textContent.trim();
+      window.location.href = `/shop?q=${encodeURIComponent(q)}`;
+    });
+  });
+
+  // Newsletter
+  document.getElementById('newsletter-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    window.showToast('Subscribed successfully!');
+    this.reset();
+  });
+</script>

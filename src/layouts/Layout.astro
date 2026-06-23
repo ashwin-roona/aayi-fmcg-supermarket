@@ -1,0 +1,116 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'AAYI Mart — Fresh groceries delivered fast.' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title} — AAYI Mart</title>
+  <link rel="icon" type="image/png" href="/aayi-favicon.png" />
+  <link rel="shortcut icon" href="/aayi-favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" is:inline></script>
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased">
+  <slot />
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-gray-950 text-white px-5 py-3.5 rounded-2xl text-sm font-medium shadow-2xl z-[9999] opacity-0 pointer-events-none min-w-[220px] border border-white/10">
+    <div id="toast-icon" class="w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center shrink-0">
+      <i class="fa-solid fa-check text-[10px]"></i>
+    </div>
+    <span id="toast-msg">Added to cart!</span>
+  </div>
+
+  <script is:inline>
+    // ── Toast ───────────────────────────────────────────────
+    window.showToast = function(msg, type) {
+      const t = document.getElementById('toast');
+      const ic = document.getElementById('toast-icon');
+      const m = document.getElementById('toast-msg');
+      m.textContent = msg;
+      if (type === 'error') {
+        ic.className = 'w-6 h-6 bg-rose-500 rounded-full flex items-center justify-center shrink-0';
+        ic.innerHTML = '<i class="fa-solid fa-xmark text-[10px]"></i>';
+      } else {
+        ic.className = 'w-6 h-6 bg-primary-500 rounded-full flex items-center justify-center shrink-0';
+        ic.innerHTML = '<i class="fa-solid fa-check text-[10px]"></i>';
+      }
+      t.style.opacity = '1'; t.style.pointerEvents = 'auto';
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => { t.style.opacity = '0'; t.style.pointerEvents = 'none'; }, 2600);
+    };
+
+    // ── Cart ─────────────────────────────────────────────────
+    window.getCart = () => JSON.parse(localStorage.getItem('fm_cart') || '[]');
+    window.saveCart = (cart) => { localStorage.setItem('fm_cart', JSON.stringify(cart)); window.updateCartBadge(); };
+    window.addToCart = function(product) {
+      const cart = window.getCart();
+      const idx = cart.findIndex(i => i.id === product.id);
+      if (idx > -1) cart[idx].qty += 1; else cart.push({ ...product, qty: 1 });
+      window.saveCart(cart);
+      window.showToast(product.name.split(' ').slice(0,3).join(' ') + ' added!');
+    };
+    window.updateCartBadge = function() {
+      const count = window.getCart().reduce((s, i) => s + i.qty, 0);
+      document.querySelectorAll('.cart-count').forEach(el => {
+        el.textContent = count;
+        el.style.display = count > 0 ? 'flex' : 'none';
+      });
+    };
+
+    // ── Products ─────────────────────────────────────────────
+    window.getProducts = () => JSON.parse(localStorage.getItem('fm_products') || '[]');
+    window.saveProducts = (p) => localStorage.setItem('fm_products', JSON.stringify(p));
+
+    // ── Seed (v3 — with real images) ────────────────────────
+    window.seedProducts = function() {
+      if (localStorage.getItem('fm_seed_v') === '3') return;
+      const u = 'https://images.unsplash.com/photo-';
+      const q = '?w=400&h=400&fit=crop&q=80&auto=format';
+      const products = [
+        { id:'p1',  name:'Dove Beauty Bar Soap',              category:'personal-care', price:45,  originalPrice:55,  brand:'Dove',          unit:'100g',   stock:150, featured:true,  description:'Moisturizing beauty bar with ¼ cream for soft, smooth skin.',    image: u+'1584305574647-0cc949a2bb9f'+q },
+        { id:'p2',  name:'Head & Shoulders Classic Shampoo',  category:'personal-care', price:225, originalPrice:280, brand:'Head & Shoulders', unit:'340ml', stock:80,  featured:true,  description:'Anti-dandruff shampoo with pyrithione zinc formula.',            image: u+'1556228720-195a672e8a03'+q },
+        { id:'p3',  name:'Pantene Pro-V Smooth Shampoo',      category:'personal-care', price:199, originalPrice:240, brand:'Pantene',       unit:'340ml',  stock:90,  featured:false, description:'10x stronger hair with Pro-V nutrient blend.',                   image: u+'1571781926291-c477ebfd024b'+q },
+        { id:'p4',  name:'Colgate Strong Teeth Toothpaste',   category:'personal-care', price:75,  originalPrice:90,  brand:'Colgate',       unit:'200g',   stock:200, featured:false, description:'Active calcium formula for strong, cavity-free teeth.',          image: u+'1559056199-641a0ac8b55e'+q },
+        { id:'p5',  name:'KitKat 4-Finger Chocolate Bar',     category:'snacks',        price:30,  originalPrice:35,  brand:'Nestlé',        unit:'41.5g',  stock:300, featured:true,  description:'Crispy wafer fingers covered with smooth milk chocolate.',        image: u+'1481391319762-47dff72954d9'+q },
+        { id:'p6',  name:'Cadbury Dairy Milk Chocolate',      category:'snacks',        price:40,  originalPrice:45,  brand:'Cadbury',       unit:'50g',    stock:250, featured:true,  description:'The iconic milk chocolate bar with unmistakable creamy taste.',   image: u+'1549007994-cb92caebd54b'+q },
+        { id:'p7',  name:"Lay's Classic Salted Chips",        category:'snacks',        price:20,  originalPrice:20,  brand:"Lay's",         unit:'52g',    stock:180, featured:false, description:'Perfectly crispy potato chips with classic salted flavor.',       image: u+'1566478989037-eec170784d0b'+q },
+        { id:'p8',  name:'Oreo Original Chocolate Cookies',   category:'snacks',        price:35,  originalPrice:40,  brand:'Oreo',          unit:'120g',   stock:220, featured:false, description:'Classic chocolate sandwich cookies with vanilla cream filling.',    image: u+'1558961363-fa8fdf82db35'+q },
+        { id:'p9',  name:'Parle-G Glucose Biscuits',          category:'snacks',        price:10,  originalPrice:10,  brand:'Parle',         unit:'100g',   stock:400, featured:false, description:"India's favourite glucose biscuits — perfect with chai.",         image: u+'1499636136210-6f4ee915583e'+q },
+        { id:'p10', name:'Maggi 2-Minute Masala Noodles',     category:'snacks',        price:14,  originalPrice:14,  brand:'Nestlé',        unit:'70g',    stock:400, featured:true,  description:"India's favourite instant noodles. Ready in 2 minutes!",         image: u+'1569718212165-3a8278d5f624'+q },
+        { id:'p11', name:'Tropicana 100% Orange Juice',       category:'beverages',     price:99,  originalPrice:120, brand:'Tropicana',     unit:'1L',     stock:100, featured:true,  description:'100% pure orange juice. No added sugar or preservatives.',        image: u+'1621506289937-a8e4df240d0b'+q },
+        { id:'p12', name:'Coca-Cola Classic',                 category:'beverages',     price:40,  originalPrice:40,  brand:'Coca-Cola',     unit:'600ml',  stock:300, featured:false, description:'The original refreshing cola taste you love.',                    image: u+'1554866585-cd94860890b7'+q },
+        { id:'p13', name:'Real Mango Fruit Juice',            category:'beverages',     price:85,  originalPrice:100, brand:'Real',          unit:'1L',     stock:120, featured:false, description:'Made with real mango pulp and natural fruit flavor.',              image: u+'1546173159-315724a31696'+q },
+        { id:'p14', name:'Bisleri Mineral Water',             category:'beverages',     price:20,  originalPrice:20,  brand:'Bisleri',       unit:'1L',     stock:500, featured:false, description:'Pure and safe mineral water with essential minerals.',             image: u+'1548839140-29a749e1cf4d'+q },
+        { id:'p15', name:'Ariel Matic Detergent Powder',      category:'household',     price:185, originalPrice:220, brand:'Ariel',         unit:'1kg',    stock:90,  featured:false, description:'Advanced stain removal for top-load washing machines.',            image: u+'1585421514284-efb74c2b69ba'+q },
+        { id:'p16', name:'Vim Dishwash Liquid',               category:'household',     price:65,  originalPrice:75,  brand:'Vim',           unit:'500ml',  stock:140, featured:false, description:'Powerful dishwash liquid that cuts grease in one wash.',           image: u+'1585421514284-efb74c2b69ba'+q },
+        { id:'p17', name:'Harpic Power Plus Toilet Cleaner',  category:'household',     price:75,  originalPrice:90,  brand:'Harpic',        unit:'500ml',  stock:100, featured:false, description:'10x stronger formula — removes 99.9% germs and limescale.',       image: u+'1585421514284-efb74c2b69ba'+q },
+        { id:'p18', name:'Amul Taaza Toned Milk',             category:'dairy',         price:28,  originalPrice:28,  brand:'Amul',          unit:'500ml',  stock:500, featured:false, description:'Fresh toned milk with 3.5% fat — your daily nutrition.',           image: u+'1563636619-e9143da7973b'+q },
+        { id:'p19', name:'Britannia Cheese Slices',           category:'dairy',         price:75,  originalPrice:85,  brand:'Britannia',     unit:'200g',   stock:80,  featured:true,  description:'Ready-to-use processed cheese slices for burgers & sandwiches.',  image: u+'1619566636858-adf3ef46400b'+q },
+        { id:'p20', name:'Amul Butter Pasteurized',           category:'dairy',         price:56,  originalPrice:60,  brand:'Amul',          unit:'100g',   stock:120, featured:false, description:'Pure pasteurized butter made from fresh cream.',                  image: u+'1589985270826-4b7bb135bc9d'+q },
+        { id:'p21', name:'Amul Dahi Curd',                    category:'dairy',         price:35,  originalPrice:40,  brand:'Amul',          unit:'400g',   stock:200, featured:false, description:'Fresh and thick curd. Rich in probiotics and calcium.',            image: u+'1488477181946-6428a0291777'+q },
+        { id:'p22', name:'Britannia Multigrain Bread',        category:'bakery',        price:45,  originalPrice:50,  brand:'Britannia',     unit:'400g',   stock:80,  featured:false, description:'Soft multigrain bread with oats, wheat and flaxseeds.',           image: u+'1509440159596-0249088772ff'+q },
+        { id:'p23', name:'Lifebuoy Total 10 Soap',            category:'personal-care', price:38,  originalPrice:45,  brand:'Lifebuoy',      unit:'125g',   stock:180, featured:false, description:'Activ Silver formula — keeps 10 problems away for 12 hours.',     image: u+'1607006344380-b6775a0824a7'+q },
+        { id:'p24', name:"Lay's Magic Masala Chips",          category:'snacks',        price:20,  originalPrice:20,  brand:"Lay's",         unit:'52g',    stock:250, featured:false, description:'Bold masala flavor on crispy potato chips. Utterly Butterly!',    image: u+'1621939514649-280e2ee25f60'+q },
+      ];
+      window.saveProducts(products);
+      localStorage.setItem('fm_seed_v', '3');
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      window.seedProducts();
+      window.updateCartBadge();
+    });
+  </script>
+</body>
+</html>

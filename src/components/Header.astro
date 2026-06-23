@@ -1,0 +1,155 @@
+---
+export interface Props { activePage?: string; }
+const { activePage = '' } = Astro.props;
+const navLinks = [
+  { href: '/',           label: 'Home',       key: 'home' },
+  { href: '/shop',       label: 'Shop',       key: 'shop' },
+  { href: '/categories', label: 'Categories', key: 'categories' },
+  { href: '/about',      label: 'About',      key: 'about' },
+  { href: '/contact',    label: 'Contact',    key: 'contact' },
+];
+---
+
+<header class="bg-white sticky top-0 z-50" id="site-header">
+  <div class="border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <!-- 3-column grid: logo | search (centred) | actions -->
+      <div class="grid grid-cols-[auto_1fr_auto] items-center h-16 gap-4">
+
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2.5 shrink-0">
+          <div class="leading-none">
+            <div class="font-black text-base text-gray-900 tracking-tight">
+              <img src="/aayi-logo.png" alt="AAYI Mart logo" width="100" height="40" class="object-contain" />
+            </div>
+            <div class="text-[10px] font-bold text-primary-600 tracking-widest uppercase hidden sm:block">Supermarket</div>
+          </div>
+        </a>
+
+        <!-- Search bar — centred in its column -->
+        <div class="hidden md:flex justify-center">
+          <div class="relative w-full max-w-xl">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm pointer-events-none"></i>
+            <input
+              id="header-search"
+              type="text"
+              placeholder="Search products, brands..."
+              class="w-full bg-gray-100 hover:bg-gray-50 focus:bg-white border-2 border-transparent focus:border-primary-300 rounded-2xl px-4 py-2.5 pl-10 pr-28 text-sm focus:outline-none focus:ring-2 focus:ring-primary-100 transition-all placeholder:text-gray-400"
+              autocomplete="off"
+            />
+            <button id="search-btn"
+              class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary-600 hover:bg-primary-500 text-white text-xs font-bold px-4 py-1.5 rounded-xl transition-colors whitespace-nowrap">
+              Search
+            </button>
+          </div>
+        </div>
+
+        <!-- Right actions -->
+        <div class="flex items-center gap-2">
+          <!-- Cart -->
+          <a href="/cart" class="relative flex items-center gap-2 bg-primary-600 hover:bg-primary-500 text-white font-bold px-4 py-2 rounded-xl transition-colors text-sm">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="hidden sm:block">Cart</span>
+            <span class="cart-count absolute -top-2 -right-2 w-5 h-5 bg-rose-500 text-white text-[10px] font-black rounded-full items-center justify-center shadow-lg" style="display:none">0</span>
+          </a>
+
+          <!-- Admin link -->
+          <a href="/admin/login" class="hidden lg:flex items-center gap-1.5 text-xs text-gray-400 hover:text-gray-700 transition-colors px-3 py-2 rounded-xl hover:bg-gray-100">
+            <i class="fa-solid fa-lock text-[10px]"></i>Admin
+          </a>
+
+          <!-- Mobile hamburger -->
+          <button id="menu-toggle" class="md:hidden p-2.5 rounded-xl hover:bg-gray-100 transition-colors" aria-label="Menu">
+            <div class="w-5 flex flex-col gap-1.5" id="burger-lines">
+              <span class="block h-0.5 bg-gray-700 rounded transition-all duration-300" id="b1"></span>
+              <span class="block h-0.5 bg-gray-700 rounded transition-all duration-300" id="b2"></span>
+              <span class="block h-0.5 bg-gray-700 rounded transition-all duration-300 w-3/4" id="b3"></span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop sub-nav -->
+  <div class="hidden md:block bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center h-10 gap-1">
+        {navLinks.map(link => (
+          <a href={link.href} class={`px-4 py-1.5 rounded-lg text-sm font-medium transition-all ${
+            activePage === link.key
+              ? 'bg-primary-50 text-primary-700 font-semibold'
+              : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+          }`}>{link.label}</a>
+        ))}
+        <div class="ml-auto flex items-center gap-4 text-xs text-gray-400">
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-truck-fast text-primary-500"></i>Free delivery ₹499+</span>
+          <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-primary-500"></i>100% Genuine</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden hidden absolute w-full bg-white border-b border-gray-100 shadow-xl z-50">
+    <!-- Mobile search -->
+    <div class="px-4 pt-4 pb-3 border-b border-gray-100">
+      <div class="relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+        <input id="mobile-search" type="text" placeholder="Search products..." class="w-full bg-gray-100 rounded-2xl px-4 py-2.5 pl-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 focus:bg-white transition-all" />
+      </div>
+    </div>
+    <!-- Mobile links -->
+    <nav class="px-4 py-3 grid grid-cols-2 gap-2">
+      {navLinks.map(link => (
+        <a href={link.href} class={`flex items-center gap-2.5 px-4 py-3 rounded-2xl text-sm font-medium transition-colors ${
+          activePage === link.key
+            ? 'bg-primary-50 text-primary-700 font-semibold'
+            : 'text-gray-700 hover:bg-gray-50'
+        }`}>{link.label}</a>
+      ))}
+      <a href="/admin/login" class="flex items-center gap-2.5 px-4 py-3 rounded-2xl text-sm font-medium text-gray-400 hover:bg-gray-50 col-span-1">
+        <i class="fa-solid fa-lock text-[11px]"></i>Admin
+      </a>
+    </nav>
+    <!-- Trust badges -->
+    <div class="px-4 pb-4 flex flex-wrap gap-3 text-xs text-gray-400 border-t border-gray-50 pt-3">
+      <span><i class="fa-solid fa-truck-fast text-primary-500 mr-1"></i>Free delivery ₹499+</span>
+      <span><i class="fa-solid fa-rotate-left text-primary-500 mr-1"></i>Easy returns</span>
+      <span><i class="fa-solid fa-shield-halved text-primary-500 mr-1"></i>Secure shopping</span>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const b1 = document.getElementById('b1'), b2 = document.getElementById('b2'), b3 = document.getElementById('b3');
+  let open = false;
+
+  toggle.addEventListener('click', () => {
+    open = !open;
+    menu.classList.toggle('hidden', !open);
+    if (open) {
+      b1.style.cssText = 'transform:translateY(8px) rotate(45deg)';
+      b2.style.opacity = '0';
+      b3.style.cssText = 'transform:translateY(-8px) rotate(-45deg);width:100%';
+    } else {
+      b1.style.cssText = b2.style.cssText = b3.style.cssText = '';
+    }
+  });
+
+  // Scroll shadow
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) header.style.boxShadow = '0 4px 24px rgba(0,0,0,0.08)';
+    else header.style.boxShadow = '';
+  }, { passive: true });
+
+  function doSearch(q) { if (q.trim()) window.location.href = `/shop?q=${encodeURIComponent(q.trim())}`; }
+  const hs = document.getElementById('header-search');
+  const ms = document.getElementById('mobile-search');
+  document.getElementById('search-btn').addEventListener('click', () => doSearch(hs.value));
+  hs.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(hs.value); });
+  if (ms) ms.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(ms.value); });
+</script>

@@ -1,0 +1,144 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const categories = [
+  { key:'personal-care', label:'Personal Care',     icon:'fa-soap',         bg:'from-emerald-500 to-primary-600',  desc:'Soaps, shampoos, skincare & oral care' },
+  { key:'snacks',        label:'Snacks & Chocolates',icon:'fa-cookie-bite', bg:'from-orange-400 to-rose-500',      desc:'Chocolates, chips, biscuits & noodles' },
+  { key:'beverages',     label:'Beverages',          icon:'fa-glass-water', bg:'from-blue-500 to-sky-400',         desc:'Juices, cold drinks, water & more' },
+  { key:'household',     label:'Household',          icon:'fa-broom',       bg:'from-violet-500 to-purple-600',    desc:'Detergents, cleaners & dishwash' },
+  { key:'dairy',         label:'Dairy & Eggs',       icon:'fa-droplet',     bg:'from-amber-400 to-yellow-500',     desc:'Milk, cheese, butter, curd & eggs' },
+  { key:'bakery',        label:'Bakery & Bread',     icon:'fa-bread-slice', bg:'from-red-400 to-rose-500',         desc:'Breads, cakes & baked goods' },
+];
+---
+
+<Layout title="Categories">
+  <Header activePage="categories" />
+
+  <!-- Hero -->
+  <section class="bg-[#0b1120] py-16 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-900/30 to-transparent"></div>
+    <div class="max-w-3xl mx-auto px-4 text-center relative">
+      <p class="section-label text-primary-400 mb-3">Explore</p>
+      <h1 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">Shop by Category</h1>
+      <p class="text-gray-400 text-base max-w-xl mx-auto">Browse our full range across 6 categories — from daily essentials to your favourite snacks.</p>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+    <!-- Category cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+      {categories.map(cat => (
+        <a href={`/shop?cat=${cat.key}`}
+          class="group relative overflow-hidden rounded-3xl cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+          <div class={`bg-gradient-to-br ${cat.bg} p-8 min-h-[180px] flex flex-col justify-between`}>
+            <!-- Background icon watermark -->
+            <div class="absolute right-4 bottom-4 w-24 h-24 bg-white/10 rounded-3xl flex items-center justify-center group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300">
+              <i class={`fa-solid ${cat.icon} text-white/30 text-5xl`}></i>
+            </div>
+            <div>
+              <div class="w-14 h-14 bg-white/20 backdrop-blur rounded-2xl flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
+                <i class={`fa-solid ${cat.icon} text-white text-2xl`}></i>
+              </div>
+              <h2 class="text-xl font-black text-white leading-tight">{cat.label}</h2>
+              <p class="text-white/70 text-sm mt-1">{cat.desc}</p>
+            </div>
+            <div class="flex items-center justify-between mt-6">
+              <span class="cat-count text-white/60 text-xs font-bold" data-cat={cat.key}>Loading...</span>
+              <span class="w-9 h-9 bg-white/20 backdrop-blur rounded-xl flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                <i class="fa-solid fa-arrow-right text-white text-sm"></i>
+              </span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Per-category product preview -->
+    {categories.map(cat => (
+      <div class="mb-14" id={`section-${cat.key}`}>
+        <div class="flex items-center justify-between mb-5">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-primary-50 rounded-xl flex items-center justify-center">
+              <i class={`fa-solid ${cat.icon} text-primary-600`}></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-black text-gray-900">{cat.label}</h3>
+              <p class="text-xs text-gray-400">{cat.desc}</p>
+            </div>
+          </div>
+          <a href={`/shop?cat=${cat.key}`} class="text-sm font-bold text-primary-600 hover:text-primary-700 flex items-center gap-1.5 transition-colors">
+            View All <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+        <div class={`cat-grid-${cat.key} grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3`}>
+          {Array(6).fill(null).map(() => (
+            <div class="rounded-2xl overflow-hidden bg-white border border-gray-100">
+              <div class="skeleton aspect-square"></div>
+              <div class="p-3 space-y-1.5">
+                <div class="skeleton h-2.5 w-12 rounded-full"></div>
+                <div class="skeleton h-3 rounded-lg"></div>
+                <div class="skeleton h-3 w-2/3 rounded-lg"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <Footer />
+</Layout>
+
+<script is:inline>
+  const CATS = ['personal-care','snacks','beverages','household','dairy','bakery'];
+
+  function renderMiniCard(p) {
+    const d = p.originalPrice > p.price ? Math.round((1-p.price/p.originalPrice)*100) : 0;
+    return `
+      <div class="product-card flex flex-col">
+        <div class="relative overflow-hidden bg-gradient-to-br from-slate-50 to-gray-100" style="aspect-ratio:1/1">
+          <img src="${p.image}" alt="${p.name}" class="product-img w-full h-full object-contain p-3" loading="lazy"
+            onerror="this.onerror=null;this.src='https://placehold.co/300x300/16a34a/ffffff?text=${encodeURIComponent(p.name.slice(0,8))}'" />
+          ${d > 0 ? `<div class="badge-discount"><i class="fa-solid fa-bolt text-[8px]"></i>${d}% OFF</div>` : ''}
+          ${p.stock > 0 ? `
+          <div class="quick-add-overlay absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-2">
+            <button onclick='window.addToCart(${JSON.stringify(p)})' class="w-full bg-white text-gray-900 font-bold text-[10px] py-2 rounded-xl active:scale-95 transition-all">
+              <i class="fa-solid fa-plus text-primary-600 mr-1"></i>Add
+            </button>
+          </div>` : ''}
+        </div>
+        <div class="p-2.5">
+          <p class="text-[9px] font-black text-primary-600 uppercase tracking-widest mb-0.5">${p.brand}</p>
+          <h4 class="font-semibold text-gray-900 text-xs leading-snug line-clamp-2 mb-1 min-h-[2rem]">${p.name}</h4>
+          <div class="flex items-center justify-between">
+            <span class="font-black text-gray-900 text-sm">₹${p.price}</span>
+            <button onclick='window.addToCart(${JSON.stringify(p)})' class="w-7 h-7 bg-primary-600 hover:bg-primary-500 text-white rounded-lg flex items-center justify-center transition-all active:scale-90 shadow-sm">
+              <i class="fa-solid fa-plus text-[10px]"></i>
+            </button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const products = window.getProducts();
+
+    // Counts
+    document.querySelectorAll('.cat-count').forEach(el => {
+      const count = products.filter(p => p.category === el.dataset.cat).length;
+      el.textContent = `${count} products`;
+    });
+
+    // Mini grids
+    CATS.forEach(cat => {
+      const grid = document.querySelector(`.cat-grid-${cat}`);
+      if (!grid) return;
+      const items = products.filter(p => p.category === cat).slice(0, 6);
+      grid.innerHTML = items.length
+        ? items.map(renderMiniCard).join('')
+        : '<div class="col-span-full text-center py-6 text-sm text-gray-400">No products yet.</div>';
+    });
+  });
+</script>
