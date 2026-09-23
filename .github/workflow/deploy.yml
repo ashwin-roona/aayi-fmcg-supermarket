@@ -1,0 +1,82 @@
+name: Deploy to FTP
+
+on:
+  push:
+    branches:
+      - "client"          # ← EDIT: the branch you deploy from
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ftp
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    env:
+      # ← EDIT: where files land on the FTP server (filesystem path)
+      SERVER_DIR: /fmcg/
+      # ← EDIT: URL path the site is served from.
+      #   Leave "" for a domain or subdomain root; "/portfolio" for a subfolder.
+      BASE_PATH: "/fmcg"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Apply base path to build output
+        run: node .github/scripts/apply-base.mjs dist
+
+      - name: Ensure remote directory exists
+        env:
+          FTP_HOST: ${{ secrets.C_FTP_HOST }}
+          FTP_PORT: ${{ secrets.C_FTP_PORT || 21 }}
+          FTP_USER: ${{ secrets.C_FTP_USER }}
+          FTP_PASS: ${{ secrets.C_FTP_PASS }}
+        run: |
+          # One MKD per path segment, so nested server-dirs work too.
+          # The '*' prefix keeps curl going when a directory already exists.
+          #
+          # --ssl encrypts when the server offers TLS; --insecure skips cert
+          # verification, because shared hosts commonly serve a cert that does
+          # not match the FTP hostname. The deploy step below uses plain FTP,
+          # so this is no weaker than the transfer it is preparing for.
+          quotes=()
+          path=""
+          IFS='/' read -ra segments <<< "$SERVER_DIR"
+          for segment in "${segments[@]}"; do
+            [ -z "$segment" ] && continue
+            path="$path/$segment"
+            quotes+=(-Q "*MKD $path")
+          done
+          curl -sS --ssl --insecure --user "$FTP_USER:$FTP_PASS" "${quotes[@]}" \
+            "ftp://$FTP_HOST:$FTP_PORT/" -o /dev/null
+
+          # Fail here with a clear message rather than deep inside the deploy.
+          curl -sS --ssl --insecure --user "$FTP_USER:$FTP_PASS" \
+            "ftp://$FTP_HOST:$FTP_PORT$SERVER_DIR" -o /dev/null \
+            || { echo "::error::Could not create or access $SERVER_DIR on the FTP server"; exit 1; }
+
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.C_FTP_HOST }}
+          username: ${{ secrets.C_FTP_USER }}
+          password: ${{ secrets.C_FTP_PASS }}
+          port: ${{ secrets.C_FTP_PORT || 21 }}
+          local-dir: ./dist/
+          server-dir: ${{ env.SERVER_DIR }}
+          dangerous-clean-slate: true
+          timeout: 600000
