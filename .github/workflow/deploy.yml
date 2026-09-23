@@ -16,10 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # ← EDIT: where files land on the FTP server (filesystem path)
-      SERVER_DIR: /fmcg/
+      SERVER_DIR: /aayi-fmcg/
       # ← EDIT: URL path the site is served from.
       #   Leave "" for a domain or subdomain root; "/portfolio" for a subfolder.
-      BASE_PATH: "/fmcg"
+      BASE_PATH: "/aayi-fmcg"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
