@@ -45,6 +45,7 @@ jobs:
           FTP_PORT: ${{ secrets.C_FTP_PORT || 21 }}
           FTP_USER: ${{ secrets.C_FTP_USER }}
           FTP_PASS: ${{ secrets.C_FTP_PASS }}
+          
         run: |
           # One MKD per path segment, so nested server-dirs work too.
           # The '*' prefix keeps curl going when a directory already exists.
